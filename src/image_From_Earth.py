@@ -75,7 +75,7 @@ def update_sky(frame, ax, observer_position, stars):
 # Setting up the animation
 fig, ax = plt.subplots()
 observer_position = [earth.location[0], earth.location[1], earth.location[2] + earth.radius]
-observer_direction = [-1, 0, 0]  # Pointing directly along the negative x-axis towards the sun
+observer_direction = [1, 0, 0]  # Pointing directly along the negative x-axis towards the sun
 
 ani = FuncAnimation(fig, update_sky, frames=365, fargs=(ax, observer_position, stars), repeat=True)
 plt.tight_layout()

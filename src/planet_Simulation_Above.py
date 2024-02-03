@@ -17,7 +17,7 @@ Blue = (0, 0, 255)
 SUN_RADIUS = 10
 
 # Scaling factor to fit the solar system within our screen
-SCALE = 1e9     # change this if you want to see all the planets
+SCALE = 1e9   # change this if you want to see all the planets
 
 def draw_orbit(planet):
     """Draw the orbit of a planet based on its initial position."""
