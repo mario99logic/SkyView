@@ -3,30 +3,35 @@ import numpy as np
 
 
 class Star:
-    def __init__(self, name, magnitude, location):
+    def __init__(self, name, magnitude, location, color):
         self.name = name
-        self.magnitude = magnitude
-        self.location = location
+        self.magnitude = magnitude  # Brightness of the star
+        self.location = location  # x, y, z coordinates of the star
+        self.color = color  # Color of the star
 
-def generate_star_positions(num_stars, min_distance, max_distance):
-    stars = []
-    for i in range(num_stars):
-        r = random.uniform(min_distance, max_distance)  # distance from the Sun
-        theta = random.uniform(0, 2 * np.pi)  # azimuthal angle
-        phi = random.uniform(0, np.pi)  # polar angle
+    def __repr__(self):
+        return f"{self.name}: Magnitude {self.magnitude}, Location {self.location}"
 
-        # Convert spherical to Cartesian coordinates
-        x = r * np.sin(phi) * np.cos(theta)
-        y = r * np.sin(phi) * np.sin(theta)
-        z = r * np.cos(phi)
 
-        star = Star(f"Star{i}", 1, [x, y, z])
-        stars.append(star)
-    return stars
-
-# Generate stars with distances ranging from 1 light year to 100 light years from the Sun
-# 1 light year is approximately 9.461e15 meters
-stars = generate_star_positions(100, 9.461e15, 9.461e16)
+# def generate_star_positions(num_stars, min_distance, max_distance):
+#     stars = []
+#     for i in range(num_stars):
+#         r = random.uniform(min_distance, max_distance)  # distance from the Sun
+#         theta = random.uniform(0, 2 * np.pi)  # azimuthal angle
+#         phi = random.uniform(0, np.pi)  # polar angle
+#
+#         # Convert spherical to Cartesian coordinates
+#         x = r * np.sin(phi) * np.cos(theta)
+#         y = r * np.sin(phi) * np.sin(theta)
+#         z = r * np.cos(phi)
+#
+#         star = Star(f"Star{i}", 1, [x, y, z])
+#         stars.append(star)
+#     return stars
+#
+# # Generate stars with distances ranging from 1 light year to 100 light years from the Sun
+# # 1 light year is approximately 9.461e15 meters
+# stars = generate_star_positions(100, 9.461e15, 9.461e16)
 
 
 

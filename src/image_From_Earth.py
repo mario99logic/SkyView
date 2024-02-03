@@ -98,3 +98,4 @@ print(visible_planets)
 plot_sky(observer_position, visible_planets, stars)
 
 """
+

@@ -4,6 +4,7 @@ import sys
 sys.path.append('/Users/mariorohana/Desktop/SkyView')
 
 from Objects.objects import all_planets, sun
+from Objects.stars import Star
 
 pygame.init()
 
@@ -15,19 +16,34 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 Blue = (0, 0, 255)
 SUN_RADIUS = 10
+stars = [
+    Star(name="Star1", magnitude=5, location=[2e11, 0, 0], color=(255, 255, 255)),
+    Star(name="Star2", magnitude=4, location=[3e11, 0, 0], color=(255, 255, 255)),
+    Star(name="star3", magnitude=3,location=[1e11,0,0],color=(255, 255, 0)),
+    Star(name="star3", magnitude=3,location=[3e11,3e11,0],color=(0, 0, 255))
+    # Add more stars as needed
+]
 
 # Scaling factor to fit the solar system within our screen
-SCALE = 1e9     # change this if you want to see all the planets
+SCALE = 1e9
+# change this if you want to see all the planets
 
 def draw_orbit(planet):
     """Draw the orbit of a planet based on its initial position."""
     orbit_radius = int(planet.initial_location[0] / SCALE)
     pygame.draw.circle(WIN, WHITE, (WIDTH // 2, HEIGHT // 2), orbit_radius, 1)  # 1 is the line width
+##############################3
+def draw_stars(stars):
+    for star in stars:
+        # Calculate position on the screen based on the location
+        x = WIDTH // 2 + int(star.location[0] / SCALE)
+        y = HEIGHT // 2 + int(star.location[1] / SCALE)
+        pygame.draw.circle(WIN, star.color, (x, y), 2)
 
-
-def draw_window(planets):
+##################################
+def draw_window(planets,stars):
     WIN.fill(BLACK)  # Fill the screen with black color
-
+    draw_stars(stars)
     # Draw the sun in the center
     pygame.draw.circle(WIN, sun.color, (WIDTH // 2, HEIGHT // 2), SUN_RADIUS)
 
@@ -69,7 +85,7 @@ def main():
         # Simulate the motion of the planets for the next time step
         simulate_motion(all_planets, dt, dt)  # Simulate just for the next time step
 
-        draw_window(all_planets)
+        draw_window(all_planets,stars)
 
     pygame.quit()
 
