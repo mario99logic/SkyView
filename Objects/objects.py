@@ -13,6 +13,9 @@ class CelestialObject:
     def __repr__(self):
         return f"{self.name}: Location {self.location}, Speed {self.speed}"
 
+moon_distance_from_earth = 384400e3  # in meters from Earth
+moon_location_relative_to_earth = [1.496e11 + moon_distance_from_earth, 0, 0]  # Simplified model
+
 
 # Create an instance for Sun
 sun = CelestialObject(
@@ -124,7 +127,20 @@ neptune = CelestialObject(
     color=(54, 104, 150)
 )
 
-all_planets = [sun, earth, mercury, venus, mars, jupiter, saturn, uranus, neptune]
+moon = CelestialObject(
+    object_type="Moon",
+    name="moon",
+    mass=7.342e22,
+    radius=1737.4e3,
+    location=moon_location_relative_to_earth,
+    speed=[0, 1.022e3, 0],  # Simplified, relative to Earth's movement
+    initial_speed=[0, 1.022e3, 0],
+    initial_location=moon_location_relative_to_earth,
+    color=(190, 190, 190)
+)
+
+
+all_planets = [sun, earth, mercury, venus, mars, jupiter, saturn, uranus, neptune, moon]
 
 # Predefined locations on Earth
 locations = {
@@ -134,12 +150,4 @@ locations = {
     # ... add more locations as needed
 }
 
-# Directions based on cardinal directions
-directions = {
-    "North": [0, 1, 0],
-    "South": [0, -1, 0],
-    "East": [1, 0, 0],
-    "West": [-1, 0, 0],
-    "Up": [0, 0, 1],  # Zenith
-    "Down": [0, 0, -1]  # Nadir
-}
+

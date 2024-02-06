@@ -13,6 +13,14 @@ class Star:
         return f"{self.name}: Magnitude {self.magnitude}, Location {self.location}"
 
 
+stars = [
+    Star(name="Star1", magnitude=5, location=[2e11, 0, 0], color=(255, 255, 255)),
+    Star(name="Star2", magnitude=4, location=[3e11, 0, 0], color=(255, 255, 255)),
+    Star(name="star3", magnitude=3,location=[1e11,0,0],color=(255, 255, 0)),
+    Star(name="star3", magnitude=3,location=[3e11,3e11,0],color=(0, 0, 255))
+    # Add more stars as needed
+]
+
 # def generate_star_positions(num_stars, min_distance, max_distance):
 #     stars = []
 #     for i in range(num_stars):

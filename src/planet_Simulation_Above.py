@@ -4,7 +4,7 @@ import sys
 sys.path.append('/Users/mariorohana/Desktop/SkyView')
 
 from Objects.objects import all_planets, sun
-from Objects.stars import Star
+from Objects.stars import stars
 
 pygame.init()
 
@@ -16,13 +16,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 Blue = (0, 0, 255)
 SUN_RADIUS = 10
-stars = [
-    Star(name="Star1", magnitude=5, location=[2e11, 0, 0], color=(255, 255, 255)),
-    Star(name="Star2", magnitude=4, location=[3e11, 0, 0], color=(255, 255, 255)),
-    Star(name="star3", magnitude=3,location=[1e11,0,0],color=(255, 255, 0)),
-    Star(name="star3", magnitude=3,location=[3e11,3e11,0],color=(0, 0, 255))
-    # Add more stars as needed
-]
+
 
 # Scaling factor to fit the solar system within our screen
 SCALE = 1e9
