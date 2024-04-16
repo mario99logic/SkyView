@@ -31,17 +31,23 @@ def hms_to_radians(hours, minutes, seconds):
     radians = total_degrees * (np.pi / 180)
     return radians
 
+
+def hms_to_degrees(hours, minutes, seconds):
+    total_degrees = hours * 15 + minutes / 4 + seconds / 240
+    return total_degrees
+
 #converts the declination attribute to radians
-def degrees_to_radians(dec_degrees,dec_minutes,dec_seconds):
-    dec_rad = (dec_degrees + dec_minutes / 60 + dec_seconds / 3600) * (math.pi / 180)
+def dec_to_radians(dec_degrees,dec_minutes,dec_seconds):
+    dec_rad = (dec_degrees + dec_minutes / 60 + dec_seconds / 3600) * (np.pi / 180)
     return dec_rad
 
-#the functions exectutes a transformation from equatorial coordinate system
-#to ecliptic coordinates system
-#note:aplha is the Rigth Ascension and delta is Declination attribute
-#it works on array of locations (multiple objects) its crusial to  have alpha and delta with same length
-#retruned values: lambda represents the longitude attribute in the ecliptic system, beta represents the latitude attribute
-#alpha and... are in radians
+# the functions exectutes a transformation from equatorial coordinate system
+# to ecliptic coordinates system
+# note:aplha is the Rigth Ascension and delta is Declination attribute
+# it works on array of locations (multiple objects) its crusial to  have alpha and delta with same length
+# retruned values: lambda represents the longitude attribute in the ecliptic system,
+# beta represents the latitude attribute
+# alpha and... are in radians
 def equat2eclip(alpha, delta):
     # Earth's axial tilt in radians
     epsilon = (23 + 26/60 + 21.448/3600) * np.pi / 180
@@ -72,9 +78,7 @@ def equat2eclip(alpha, delta):
     return lambda_val, beta
 
 
-
-
-#conversion from ecliptic system to equatorial system
+# conversion from ecliptic system to equatorial system
 def eclip2equat(lambda_ecliptic, beta_ecliptic):
     # J2000 epoch Earth's axial tilt in radians
     epsilon = (23 + 26/60 + 21.448/3600) * np.pi / 180
@@ -106,11 +110,13 @@ def eclip2equat(lambda_ecliptic, beta_ecliptic):
 
     return alpha, delta
 
-#the function executes a transformation from ecliptic system to heliocentric system which centered on Sun
+# the function executes a transformation from ecliptic system
+# to heliocentric system which centered on Sun
 def eclip2helio(llambda_val,bet):
     pass
 
- # #the function converts from equatorial coordinate system centered on earth to galactic coordinate system centered on sun
+# the function converts from equatorial coordinate system
+# centered on earth to galactic coordinate system centered on sun
 # #where alpha is the right ascension in radians and delta is declination in radians
 def equatorial_to_galactic(alpha, delta):
     # Galactic center coordinates in equatorial system (centered on Sun)
@@ -154,3 +160,58 @@ def galactic_to_cartesian(l, b):
     z = r * np.sin(b)
 
     return x, y, z
+
+# after getting the body's position we use this function to transform from cartesian coordinates to equatorial
+def cartesian_to_equatorial(x, y, z):
+    d = np.sqrt(x ** 2 + y ** 2 + z ** 2)
+    DEC = np.arcsin(z / d)
+    RA = np.arctan2(y, x)
+    return RA, DEC
+
+# transforming from equatorial coordinates to horizontal
+def equatorial_to_horizontal(RA, DEC, observer_latitude, LST):
+    # Convert RA, DEC, observer_latitude from degrees to radians for calculation
+    RA, DEC, observer_latitude = np.radians(RA), np.radians(DEC), np.radians(observer_latitude)
+    HA = LST - RA
+
+    # Calculate Altitude
+    sin_alt = np.sin(DEC) * np.sin(observer_latitude) + np.cos(DEC) * np.cos(observer_latitude) * np.cos(HA)
+    Alt = np.arcsin(sin_alt)
+
+    # Calculate Azimuth
+    cos_az = (np.sin(DEC) - np.sin(Alt) * np.sin(observer_latitude)) / (np.cos(Alt) * np.cos(observer_latitude))
+    sin_az = -np.cos(DEC) * np.sin(HA) / np.cos(Alt)
+    Az = np.arctan2(sin_az, cos_az)
+
+    # Convert Alt, Az back to degrees
+    Alt, Az = np.degrees(Alt), (np.degrees(Az) + 360) % 360  # Ensure Azimuth is between 0 and 360 degrees
+
+    return Alt, Az
+
+# the method gets the body postion from the simulation at a spesific time since the start time.
+def get_body_position_at_time(name, elapsed_time, celestial_bodies):
+    """
+    Get the position of a celestial body at a specific elapsed time since the start of the simulation.
+
+    Parameters:
+    - name: str, the name of the celestial body.
+    - elapsed_time: float, the elapsed time since the start of the simulation in seconds.
+    - celestial_bodies: list, a list of celestial body objects in the simulation.
+
+    Returns:
+    - dict: A dictionary with the 'name', 'position', and 'velocity' of the celestial body at the given time,
+            or None if the body is not found.
+    """
+
+
+    # Find and return the specified body's position and velocity
+    for body in celestial_bodies:
+        if body.name.lower() == name.lower():
+            return {
+                'name': body.name,
+                'position': body.location,  # Assuming .location is updated by your simulation
+                'velocity': body.speed  # Assuming .speed is updated by your simulation
+            }
+
+    # Return None if the specified body wasn't found
+    return None

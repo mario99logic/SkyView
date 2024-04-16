@@ -7,11 +7,24 @@ from astropy.coordinates import EarthLocation, AltAz, get_body, solar_system_eph
 from astropy.time import Time
 import astropy.units as u
 from Objects.objects import all_planets
+from Objects.stars import stars
+from astropy.coordinates import SkyCoord
+# from datetime import datetime,timedelta
+
+
+
 
 pygame.init()
 WIDTH, HEIGHT = 800, 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Night Sky Simulation")
+
+# start_time = datetime(2000,1,1)
+"""
+# create current time = datetime.now(),then time_elapsed = current_time - start_time 
+# then elapsed time is time delta object
+# we can call the total_seconds method from it
+"""
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -53,6 +66,19 @@ def draw_local_sky(observer_position, current_time):
 
                 label = FONT.render(planet_fromData.name.capitalize(), 1, WHITE)
                 WIN.blit(label, (x + 5, y + 5))
+    altaz_frame = AltAz(obstime=current_time, location=observer_location)
+    for star in stars:
+        # Assuming star.location is given in right ascension and declination
+        star_coord = SkyCoord(ra=star.ra * u.rad, dec=star.dec * u.rad, frame='icrs')
+        # transform stars coords from equatorial system (centered on Earth) to horizontal (relative to the observer location)
+        star_altaz = star_coord.transform_to(altaz_frame)
+
+        if star_altaz.alt > 0:  # If above horizon
+            x, y = altaz_to_screen(star_altaz.alt, star_altaz.az)
+            pygame.draw.circle(WIN, star.color, (x, y), 3)  # Stars might be smaller than planets in visualization
+            # Display star names
+            label = FONT.render(star.name, 1, WHITE)
+            WIN.blit(label, (x + 5, y + 5))
 
     pygame.display.update()
 
@@ -81,3 +107,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+

@@ -19,20 +19,24 @@ SUN_RADIUS = 10
 
 
 # Scaling factor to fit the solar system within our screen
-SCALE = 1e9
+SCALE = 1e9*1500000
+
 # change this if you want to see all the planets
 
 def draw_orbit(planet):
     """Draw the orbit of a planet based on its initial position."""
     orbit_radius = int(planet.initial_location[0] / SCALE)
     pygame.draw.circle(WIN, WHITE, (WIDTH // 2, HEIGHT // 2), orbit_radius, 1)  # 1 is the line width
-##############################3
+##############################
 def draw_stars(stars):
     for star in stars:
         # Calculate position on the screen based on the location
         x = WIDTH // 2 + int(star.location[0] / SCALE)
         y = HEIGHT // 2 + int(star.location[1] / SCALE)
+
         pygame.draw.circle(WIN, star.color, (x, y), 2)
+        label = FONT.render(star.name, 1, WHITE)
+        WIN.blit(label, (x + 5, y + 5))
 
 ##################################
 def draw_window(planets,stars):
