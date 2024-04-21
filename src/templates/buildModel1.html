@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Menu</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/uploadImages1.css') }}">
+   <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/buildModel1.css') }}">
+
+</head>
+
+<body>
+
+    <div class="topbar">
+        <div class="topbar-brand">SkyView</div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="navbar">
+
+                <a href="design.html">Home</a>
+                <a href="#">Menu1</a>
+                <a href="#">Menu2</a>
+                <a href="#">Menu3</a>
+            </div>
+            
+        </button>
+    </div>
+
+
+    <body>
+        <div class="title">
+          Model Definition
+        </div>
+        <div class="title-line"></div>
+        <div class="title-2">
+            Add Object:
+        </div>
+
+        
+        
+        
+        
+        <div class="transparent-background"> 
+            <div class="form-container">
+                <div class="form-group">
+                  <label for="type">Select type:</label>
+                  <select id="type" name="type">
+                      <option value="planet">Planet</option>
+                      <option value="Star">Star</option>
+                  </select>
+                </div>
+  
+                <div class="form-group">
+                  <label for="mass">Mass:</label>
+                  <input type="text" id="mass" name="mass">
+                </div>
+            
+                <div class="form-group">
+                  <label for="radius">Radius:</label>
+                  <input type="text" id="radius" name="radius">
+                </div>
+            
+                <div class="form-group">
+                  <label for="position">Position:</label>
+                  <input type="text" id="position" name="position">
+                </div>
+            
+                <div class="form-group">
+                  <label for="speed">Speed:</label>
+                  <input type="text" id="speed" name="speed">
+                </div>
+  
+              </div>
+
+              <button type="button" id="addButton" class="btn-add">Add</button>
+
+              <div class="inner-transparent-background">
+                <div class="object-box">
+                    <img src="../static/images/sun.webp" alt="Object Image" class="object-image">
+                    <div class="object-parameters">
+                      <p><span class="parameter-label">Mass:</span> 10kg</p>
+                      <p><span class="parameter-label">Radius:</span> 5m</p>
+                      <p><span class="parameter-label">Position:</span> 100m</p>
+                      <p><span class="parameter-label">Speed:</span> 20m/s</p>
+                    
+                    </div>
+                    <button class="delete-button">X</button>
+                </div>
+                <div class="object-box"></div>
+                <div class="object-box"></div>
+                <div class="object-box"></div>
+                <div class="object-box"></div>
+                <div class="object-box"></div>
+                
+              </div>
+
+        </div>
+
+        <button type="button" id="addButton" class="btn-main">Simulate Model</button>
+         <a href="{{ url_for('home') }}">
+    <button type="button" class="btn-back">&larr; Back</button>
+        </a>
+        <button class="help-button">?</button>
+
+        </body>
+    
+    </body>
+
+    </html>

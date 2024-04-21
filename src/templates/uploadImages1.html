@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/uploadImages1.css') }}">
+    <script src="{{ url_for('static', filename='assets/js/uploadImageFunctionality.js') }}"></script>
+</head>
+
+<body>
+
+    <div class="topbar">
+        <div class="topbar-brand">SkyView</div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="navbar">
+                <a href="#">Home</a>
+                <a href="#">Menu1</a>
+                <a href="#">Menu2</a>
+                <a href="#">Menu3</a>
+            </div>
+
+        </button>
+    </div>
+
+    <div class="title">
+        Image Database
+      </div>
+      <div class="title-line"></div>
+      <div class="title-UploadImages">
+          Upload Image:
+      </div>
+
+      <div class="transparent-background">
+
+          <button class="file-button" onclick="triggerFileInput();">Choose file 📄</button>
+
+        <div class="UploadData-background">
+           <input type="file" id="fileInput" multiple style="display:none;" accept="image/*" onchange="uploadFiles(this.files); previewImage(this.files);">
+
+            <img id="uploadIcon" src="../static/images/upload-icon.png" alt="Upload images">
+            <div class="upload-text">Click the file button to upload images</div>
+            <!-- Container for displaying the image preview -->
+            <div id="imagePreviewContainer" style="width: 100%; height: auto; margin-top: 20px;"></div>
+        </div>
+
+
+      </div>
+
+      <button class="help-button">?</button>
+      <button type="button" id="addButton" class="btn-main">Continue</button>
+      <a href="{{ url_for('home') }}">
+    <button type="button" class="btn-back">&larr; Back</button>
+        </a>
+
+
+
+</body>
+
+</html>
