@@ -66,10 +66,6 @@ def update_sky(frame, ax, observer_position, stars):
         x, y = direction_to_2d_coordinates(observer_position, obj.location)
         ax.plot(x, y, 'o', color=normalize_color(obj.color), label=obj.name)  # Planets as white dots
 
-    #for star in stars:
-        #x, y = direction_to_2d_coordinates(observer_position, star.location)
-        #ax.plot(x, y, '*', color='white')  # Stars as white stars
-
     ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 # Setting up the animation
