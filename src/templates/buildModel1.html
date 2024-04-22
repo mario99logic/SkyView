@@ -6,6 +6,12 @@
     <title>Sidebar Menu</title>
    <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/uploadImages1.css') }}">
    <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/buildModel1.css') }}">
+    <script>
+        // Define global variables for URLs
+        var simulateUrl = "{{ url_for('simulate_model') }}";
+    </script>
+    <script src="{{ url_for('static', filename='../static/assets/js/buildModel.js') }}"></script>
+
 
 </head>
 
@@ -37,9 +43,7 @@
             Add Object:
         </div>
 
-        
-        
-        
+
         
         <div class="transparent-background"> 
             <div class="form-container">
@@ -47,36 +51,65 @@
                   <label for="type">Select type:</label>
                   <select id="type" name="type">
                       <option value="planet">Planet</option>
-                      <option value="Star">Star</option>
+                      <option value="star">Star</option>
                   </select>
                 </div>
-  
+
+                <div class="form-group" id="planet-fields">
+                <div class="form-group">
+                  <label for="mass">Name:</label>
+                  <input type="text" id="name">
+                </div>
+
                 <div class="form-group">
                   <label for="mass">Mass:</label>
-                  <input type="text" id="mass" name="mass">
+                  <input type="number" id="mass">
                 </div>
-            
+
                 <div class="form-group">
                   <label for="radius">Radius:</label>
-                  <input type="text" id="radius" name="radius">
+                  <input type="number" id="radius">
                 </div>
-            
+
                 <div class="form-group">
-                  <label for="position">Position:</label>
-                  <input type="text" id="position" name="position">
+                   <label for="position">Position (x, y, z):</label>
+                   <input type="text" id="position">
                 </div>
-            
+
                 <div class="form-group">
-                  <label for="speed">Speed:</label>
-                  <input type="text" id="speed" name="speed">
+                  <label for="speed">Speed (vx, vy, vz):</label>
+                  <input type="text" id="speed">
                 </div>
-  
+
+                 </div>
+
+                 <div class="form-group" id="star-fields" style="display: none;">
+
+                    <div class="form-group">
+                  <label for="mass">Name:</label>
+                  <input type="text" id="starname">
+                    </div>
+
+                     <div class="form-group">
+                    <label for="magnitude">Magnitude:</label>
+                    <input type="number" id="magnitude">
+                     </div>
+
+                     <div class="form-group">
+                        <label for="position">Position (x, y, z):</label>
+                        <input type="text" id="starposition">
+                     </div>
+
+
+                 </div>
+
+
               </div>
 
-              <button type="button" id="addButton" class="btn-add">Add</button>
+              <button type="button" class="btn-add" onclick="addObject()">Add</button>
 
               <div class="inner-transparent-background">
-                <div class="object-box">
+              <!--  <div class="object-box">
                     <img src="../static/images/sun.webp" alt="Object Image" class="object-image">
                     <div class="object-parameters">
                       <p><span class="parameter-label">Mass:</span> 10kg</p>
@@ -92,12 +125,13 @@
                 <div class="object-box"></div>
                 <div class="object-box"></div>
                 <div class="object-box"></div>
-                
+                -->
               </div>
 
         </div>
 
-        <button type="button" id="addButton" class="btn-main">Simulate Model</button>
+           <button type="button" class ="btn-main" onclick="sendObjects('{{ url_for('build_model') }}')">Simulate Model</button>
+
          <a href="{{ url_for('home') }}">
     <button type="button" class="btn-back">&larr; Back</button>
         </a>

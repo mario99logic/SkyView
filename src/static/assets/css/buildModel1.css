@@ -26,7 +26,7 @@
 .form-group {
     display: flex;
     align-items:center;
-    margin-bottom: 20px; /* Space between each label-input pair */
+    margin-bottom: 17px; /* Space between each label-input pair */
     width: 100%; /* Ensure the form group takes the full width of its container */
 }
 

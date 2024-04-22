@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os
 
@@ -48,8 +48,16 @@ def upload():
 
 
 @app.route('/buildModel')
-def buildModel():
+def build_model():
     return render_template('buildModel1.html')
+
+@app.route('/simulate', methods=['POST'])
+def simulate_model():
+    data = request.json  # Get JSON data sent from JavaScript
+    objects = data['objects']  # Extract objects list from JSON
+    print("Received objects:", objects)  # Debug: print the objects
+    # Here you can process these objects as needed
+    return jsonify({'status': 'success', 'message': 'Objects received successfully!'})
 
 if __name__ == "__main__":
     app.run(debug=True)
