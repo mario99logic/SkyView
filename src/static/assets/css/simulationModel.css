@@ -1,0 +1,78 @@
+#header, #navPanel {
+
+    background-color: #5385c1; /* Adjusted the header background color */
+    top: 0; /* Ensures the header starts right at the top of the viewport */
+    position: fixed; /* Keeps the header at the top during scrolling */
+    width: 100%; /* Ensures the header spans the full width */
+    z-index: 1000; /* Ensures the header stays on top of other content */
+}
+#header .inner {
+    width: 100%; /* Ensures the inner content of the header also spans full width */
+    margin: 0 auto; /* Centers the inner content */
+
+}
+body {
+    padding-top: 4em; /* Adds padding to the top of the body to prevent content from hiding behind the fixed header */
+    margin: 0;
+    font-family: Arial, sans-serif; /* Ensures a consistent font is used */
+}
+ #one h3, #two h3 {
+    text-align: left; /* Centers the lobby title */
+    font-size: 2em; /* Larger font size for visibility */
+    color: #5385c1; /* Theme color for the text */
+    font-family: 'Raleway', Arial, sans-serif; /* Ensures titles use the specific font */
+    font-weight: 300; /* Specific font-weight for titles */
+    margin: 0; /* Resets any default margin */
+}
+
+
+#lobby-title {
+    text-align: center; /* Centers the lobby title */
+    font-size: 2em; /* Larger font size for visibility */
+    color: #5385c1; /* Theme color for the text */
+    font-family: 'Raleway', Arial, sans-serif; /* Ensures titles use the specific font */
+    font-weight: 300; /* Specific font-weight for titles */
+}
+#one, #two {
+    padding-top: 0; /* Reduces default padding */
+}
+.flex-container {
+    display: flex; /* Sets a flex container */
+    align-items: center; /* Centers items vertically */
+    justify-content: space-between; /* Distributes space between items */
+    margin-bottom: 2em; /* Adds space between sections */
+}
+.flex-container img {
+    max-width: 300px; /* Limits image size */
+    margin-right: 2em; /* Space between image and text */
+}
+.flex-container .text-content {
+    flex-grow: 1; /* Allows text content to fill the available space */
+}
+
+footer {
+    display: flex; /* Ensures that elements within the footer are laid out as flex items */
+    align-items: center; /* Aligns items vertically in the center */
+    justify-content: start; /* Aligns content to the start of the footer */
+}
+
+footer .button {
+    margin-right: 20px; /* Ensures there is space between the buttons */
+    flex-shrink: 0; /* Prevents the buttons from shrinking */
+
+}
+
+.help-button {
+    background-color: #5385c1; /* Button background color */
+    color: white;
+    border: none; /* Removes the default border */
+    width: 42px; /* Specifies the diameter of the button */
+    height: 42px; /* Ensures height equals width for a perfect circle */
+    font-size: 24px; /* Size of the icon or text inside the button */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    display: inline-flex; /* Uses flexbox for centering content inside the button */
+    align-items: center; /* Centers content vertically inside the button */
+    justify-content: center; /* Centers content horizontally inside the button */
+    line-height: 1; /* Adjusts line height to ensure vertical centering */
+    padding: 0; /* Removes any padding that might affect the shape */
+}

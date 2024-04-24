@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os
+import subprocess
 
 app = Flask(__name__)
 
@@ -58,6 +59,20 @@ def simulate_model():
     print("Received objects:", objects)  # Debug: print the objects
     # Here you can process these objects as needed
     return jsonify({'status': 'success', 'message': 'Objects received successfully!'})
+
+@app.route('/simulationModel1')
+def simulate_model1():
+    return render_template('simulationModel.html')
+
+@app.route('/start-simulation')
+def start_simulation():
+    try:
+        # Runs the pygame script as a separate process
+        subprocess.Popen(['python', 'planet_Simulation_Above.py'])
+        return "Simulation started"
+    except Exception as e:
+        return str(e)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
