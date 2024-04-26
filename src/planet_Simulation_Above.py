@@ -2,7 +2,6 @@ import pygame
 from motion_Calculations import simulate_motion
 import sys
 
-sys.path.append('/Users/mariorohana/Desktop/SkyView')
 
 from Objects.objects import all_planets, sun
 
@@ -83,23 +82,33 @@ def main():
 
     run = True
     clock = pygame.time.Clock()
-    dt = 8640  # Time step for each frame, representing one day
+    dt = 86400  # Time step for each frame, representing one day
 
     while run:
-        clock.tick(60)
+        clock.tick(60)  # Control the frame rate to a reasonable number
+        keys = pygame.key.get_pressed()  # Get the state of all keys
+
+        if keys[pygame.K_RIGHT]:
+            SCALE *= 1.05  # Slightly increase scale continuously while key is held
+        if keys[pygame.K_LEFT]:
+            SCALE /= 1.05  # Slightly decrease scale continuously while key is held
+        if keys[pygame.K_UP]:
+            dt *= 1.05  # Increase dt for faster simulation speed
+            dt = min(dt, 86400 * 10)  # Limit maximum dt to avoid too fast simulation
+        if keys[pygame.K_DOWN]:
+            dt /= 1.05  # Decrease dt for slower simulation speed
+            dt = max(dt, 1)  # Ensure dt does not go below 1 to prevent negative or zero delta time
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    SCALE *= 1.1  # Increase scale by 10%
-                elif event.key == pygame.K_LEFT:
-                    SCALE /= 1.1  # Decrease scale by 10%
 
         simulate_motion(all_planets, dt, dt)
         draw_window(all_planets)
 
     pygame.quit()
+
+
 
 
 main()

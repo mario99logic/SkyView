@@ -2,6 +2,10 @@ from flask import Flask, request, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os
 import subprocess
+import pickle
+
+from Objects.objects import parse_data_to_objects
+from src.motion_Calculations import simulate_motion
 
 app = Flask(__name__)
 
@@ -52,13 +56,22 @@ def upload():
 def build_model():
     return render_template('buildModel1.html')
 
-@app.route('/simulate', methods=['POST'])
+@app.route('/simulate', methods=['POST'])    #here we want to simulate the model!!!!!!
 def simulate_model():
     data = request.json  # Get JSON data sent from JavaScript
     objects = data['objects']  # Extract objects list from JSON
-    print("Received objects:", objects)  # Debug: print the objects
-    # Here you can process these objects as needed
-    return jsonify({'status': 'success', 'message': 'Objects received successfully!'})
+    stars, planets = parse_data_to_objects(objects)
+    print("Received objects:", planets)  # Debug: print the objects
+    with open('planets_data.pkl', 'wb') as f:
+        pickle.dump(planets, f)
+    try:
+        # Run the Pygame script as a separate process
+        subprocess.Popen(['python', 'planet_Simulation_Orbit.py'])
+        return jsonify({'status': 'success', 'message': 'Simulation started and objects received successfully!'})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)})
+
+
 
 @app.route('/simulationModel1')
 def simulate_model1():

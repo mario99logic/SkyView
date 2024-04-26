@@ -61,10 +61,8 @@ function addObject() {
         speedField.value = '';
 
     } else if (type === 'star') {
-        let magnitudeField = document.getElementById('magnitude');
-        let magnitude = magnitudeField.value;
 
-        if (!nameField.value || !magnitude || !position) {
+        if (!nameField.value || !position) {
             alert("All fields must be filled out to add a star.");
             return;
         }
@@ -74,7 +72,6 @@ function addObject() {
             id: nextId++,
             type: type,
             name: nameField.value,
-            magnitude: parseFloat(magnitude),
             position: position,
             color: 'grey'  // Assuming color for stars for now
         };
@@ -85,19 +82,24 @@ function addObject() {
 
         // Clearing the fields after adding the object
         nameField.value = '';
-        magnitudeField.value = '';
         positionField.value = '';
     }
 }
 
 
 function updateUI(obj) {
-
+    const knownStars = ["sun"];
     const knownPlanets = ["earth", "venus", "mercury", "saturn", "mars", "jupiter", "uranus", "neptune"];
+
     // Determine the image source based on the name and type
-    let imageSrc = knownPlanets.includes(obj.name.toLowerCase()) ? `${obj.name.toLowerCase()}.webp`
-                   : obj.type === 'planet' ? 'planet.webp'
-                   : 'star.webp'; // Default image for stars
+    let imageSrc;
+    if (obj.type === 'planet' && knownPlanets.includes(obj.name.toLowerCase())) {
+        imageSrc = `${obj.name.toLowerCase()}.webp`;
+    } else if (obj.type === 'star' && knownStars.includes(obj.name.toLowerCase())) {
+        imageSrc = `${obj.name.toLowerCase()}.webp`;  // Specific image for the sun or other specific stars
+    } else {
+        imageSrc = obj.type === 'planet' ? 'planet.webp' : 'star.webp';  // Default images for unknown planets and stars
+    }
 
     let container = document.querySelector('.inner-transparent-background');
     let newObjectHTML = `

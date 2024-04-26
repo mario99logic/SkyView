@@ -13,6 +13,66 @@ class CelestialObject:
     def __repr__(self):
         return f"{self.name}: Location {self.location}, Speed {self.speed}"
 
+
+def parse_data_to_objects(data):
+    stars = []
+    planets = []
+    for item in data:
+        name = item['name']
+        position = [float(x) for x in item['position'].split(',')]  # Parse position
+
+        if item['type'].lower() == 'planet':  # Include Sun in planets for typical simulations
+            # For planets, gather speed, mass, and radius
+            speed = [float(x) for x in item['speed'].split(',')]  # Parse speed
+            mass = float(item['mass'])  # Mass as float
+            radius = float(item['radius'])  # Radius as float
+
+            # Create planet object
+            planet = CelestialObject(
+                name=name,
+                object_type='planet',
+                mass=mass,
+                radius=radius,
+                location=position,
+                speed=speed,
+                initial_speed=speed,
+                initial_location=position,
+                color=(255, 255, 255)  # Assume white color for simplicity
+            )
+            planets.append(planet)
+
+        elif item['name'].lower() == 'sun':
+            planet = CelestialObject(
+                object_type="star",
+                name="sun",
+                mass=1.989e30,
+                radius=696340e3,
+                location=position,
+                speed=[0, 0, 0],  # Sun is considered stationary for this model
+                initial_speed=[0, 0, 0],
+                initial_location=position,
+                color=(255, 255, 0)
+            )
+            planets.append(planet)
+
+        elif item['type'].lower() == 'star' and name != 'sun':
+            # For stars, just the name and position
+            star = CelestialObject(
+                object_type="Star",
+                name="sun",
+                mass=1.989e30,
+                radius=696340e3,
+                location=position,
+                speed=[0, 0, 0],
+                initial_speed=[0, 0, 0],
+                initial_location=position,
+                color=(255, 255, 0)
+            )
+            stars.append(star)
+
+    return stars, planets
+
+
 moon_distance_from_earth = 384400e3  # in meters from Earth
 moon_location_relative_to_earth = [1.496e11 + moon_distance_from_earth, 0, 0]  # Simplified model
 
@@ -141,6 +201,14 @@ moon = CelestialObject(
 
 
 all_planets = [sun, earth, mercury, venus, mars, jupiter, saturn, uranus, neptune, moon]
+
+#all_planets = [sun, earth]
+
+
+
+
+
+
 
 # Predefined locations on Earth
 locations = {

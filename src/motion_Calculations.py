@@ -45,10 +45,12 @@ def simulate_motion(celestial_bodies, dt, total_time):
     time_elapsed = 0
     while time_elapsed < total_time:
         for planet in celestial_bodies:
-            if planet.object_type == "Planet":  # Only update planets
+
+            if planet.object_type.lower() == "planet":  # Only update planets
                 net_force = compute_net_gravitational_force(planet, celestial_bodies)
                 planet.speed = update_velocity(planet, net_force, dt)
                 planet.location = update_position(planet, dt)
+
         time_elapsed += dt
 
 
