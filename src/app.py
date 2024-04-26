@@ -56,7 +56,12 @@ def upload():
 def build_model():
     return render_template('buildModel1.html')
 
-@app.route('/simulate', methods=['POST'])    #here we want to simulate the model!!!!!!
+@app.route('/buildModel/clientSimulation')
+def build_model_client_simulation():
+    # Load and render the next page in the building model process
+    return render_template('newPage.html')
+
+@app.route('/simulate', methods=['POST'])
 def simulate_model():
     data = request.json  # Get JSON data sent from JavaScript
     objects = data['objects']  # Extract objects list from JSON
@@ -70,7 +75,6 @@ def simulate_model():
         return jsonify({'status': 'success', 'message': 'Simulation started and objects received successfully!'})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
-
 
 
 @app.route('/simulationModel1')

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyView Simulation Lobby</title>
+    <link rel="stylesheet" href="../static/assets/css/main.css">
+    <link rel="stylesheet" href="../static/assets/css/simulationModel.css">
+    <script src="{{ url_for('static', filename='../static/assets/js/simulationModel.js') }}"></script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="index.html" class="logo">SkyView</a>
+            <nav id="nav">
+                <a  href="{{ url_for('home') }}">Home</a>
+                <a href="generic.html">Generic</a>
+                <a href="elements.html">Elements</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+
+    <!-- Lobby Title -->
+    <section id="lobby-title">
+        <h2>Client Simulation Lobby</h2>
+    </section>
+
+    <!-- Section One -->
+    <section id="one" class="wrapper">
+        <div class="inner">
+            <header>
+                <h3>Custom Simulation</h3>
+            </header>
+            <div class="flex-container">
+                <img src="../static/images/simulationAbove.png" alt="Sky Map Sample">
+                <div class="text-content">
+                    <p>Experience the solar system as you define it with this interactive simulation tool. Designed to visualize the movements of planets based on parameters you initialize, this model allows for a unique exploration that may not strictly adhere to real-world data. Each planet's trajectory, influenced by your values for mass, speed, and orbit, offers a personalized and insightful look into celestial mechanics. Enhance your viewing experience by using the left and right arrow keys to zoom out and in, respectively. Additionally, the simulation's time step (dt) is set to one day, but you can adjust the speed of the simulation—making it faster or slower—by using the up and down arrow keys. This feature offers flexibility in observing the dynamic interactions at various speeds. It's an excellent resource for teachers, students, and anyone interested in astronomy, offering a clear view of the gravitational forces at play and the paths planets follow. Use this tool to deepen your understanding of our solar system, whether for education or personal interest.</p>
+                    <footer>
+                        <a href="#" class="button special" onclick="sendObjects('{{ url_for('build_model') }}')">Start Simulator</a>
+                        <a class="button special">?</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Two -->
+    <section id="two" class="wrapper">
+        <div class="inner">
+            <header>
+                <h3>Planet Simulator<br> Simulate planetary orbits</h3>
+            </header>
+            <div class="flex-container">
+                <img src="../static/images/planet-simulator-sample.jpg" alt="Planet Simulator Sample">
+                <div class="text-content">
+                    <p>Simulate and visualize the orbital mechanics of planets in our solar system with adjustable parameters.</p>
+                    <footer>
+                        <a href="#" class="button special" onclick="startSimulation()">Start Simulator</a>
+                        <a class="button special">?</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>
