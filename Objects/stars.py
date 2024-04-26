@@ -1,7 +1,5 @@
-import random
-import numpy as np
-from tranformation.transformations import dec_to_radians
-from tranformation.transformations import hms_to_radians
+from src.transformations import dec_to_radians
+from src.transformations import hms_to_radians
 
 class Star:
 

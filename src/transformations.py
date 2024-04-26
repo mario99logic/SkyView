@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from motion_Calculations import compute_net_gravitational_force,update_position,update_velocity
 
 # #the functions takes the right ascension (RA) and Declination parameters of an obejct (equatorial system)
 # and converts them into X_Y_Z locations
@@ -168,7 +169,13 @@ def cartesian_to_equatorial(x, y, z):
     RA = np.arctan2(y, x)
     return RA, DEC
 
-# transforming from equatorial coordinates to horizontal
+# converts lst from hours to radians
+def lst_hours_to_radians(lst_hours):
+    """Convert LST from hours to radians."""
+    return lst_hours * 15 * (np.pi / 180)
+
+# transforming from equatorial coordinates to horizontal,
+#LST stands for local sidereal time which is the time the earth needs to rotate along its axis
 def equatorial_to_horizontal(RA, DEC, observer_latitude, LST):
     # Convert RA, DEC, observer_latitude from degrees to radians for calculation
     RA, DEC, observer_latitude = np.radians(RA), np.radians(DEC), np.radians(observer_latitude)
@@ -189,7 +196,11 @@ def equatorial_to_horizontal(RA, DEC, observer_latitude, LST):
     return Alt, Az
 
 # the method gets the body postion from the simulation at a spesific time since the start time.
-def get_body_position_at_time(name, elapsed_time, celestial_bodies):
+#it simulates the calculations of the planets from the start until elpsed time
+#for example if we start the simulation at year 2000 the elapsed time would be 24 years, it updates the positions
+# along this time and returns the current position
+#for image from earth needs, we need to use cartesian_to_equatorial to get ra and dec coords, then we use equatorial_to_horizontal
+def get_body_position_at_time(name, elapsed_time, all_planets,dt):
     """
     Get the position of a celestial body at a specific elapsed time since the start of the simulation.
 
@@ -202,15 +213,23 @@ def get_body_position_at_time(name, elapsed_time, celestial_bodies):
     - dict: A dictionary with the 'name', 'position', and 'velocity' of the celestial body at the given time,
             or None if the body is not found.
     """
-
+    time = 0
+    while time < elapsed_time:
+        for planet in all_planets:
+            if planet.object_type == "Planet":  # Only update planets
+                net_force = compute_net_gravitational_force(planet, all_planets)
+                planet.speed = update_velocity(planet, net_force, dt)
+                planet.location = update_position(planet, dt)
+        time += dt
 
     # Find and return the specified body's position and velocity
-    for body in celestial_bodies:
+    for body in all_planets:
         if body.name.lower() == name.lower():
             return {
                 'name': body.name,
-                'position': body.location,  # Assuming .location is updated by your simulation
-                'velocity': body.speed  # Assuming .speed is updated by your simulation
+                'position': body.location,  #
+                'velocity': body.speed  # not final, we need to calculate the position
+                                        # based on the elapsed time (since the start of simulation)
             }
 
     # Return None if the specified body wasn't found
