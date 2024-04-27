@@ -169,3 +169,7 @@
     scrollbar-width: thin; /* "auto" or "thin" */
     scrollbar-color: skyblue rgba(51, 56, 57, 0.56); /* thumb and track color */
 }
+
+.btn-link {
+    text-decoration: none;
+}

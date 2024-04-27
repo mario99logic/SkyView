@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 import subprocess
@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = '../uploadedImages'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 
+
 @app.route('/')
 def home():
     # This route will render your home page template.
@@ -22,7 +23,7 @@ def home():
 # Function to check file extension
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+        filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -56,12 +57,14 @@ def upload():
 def build_model():
     return render_template('buildModel1.html')
 
+
 @app.route('/buildModel/clientSimulation')
 def build_model_client_simulation():
     # Load and render the next page in the building model process
-    return render_template('newPage.html')
+    return render_template('clientSimulation.html')
 
-@app.route('/simulate', methods=['POST'])
+
+@app.route('/buildModel', methods=['POST'])
 def simulate_model():
     data = request.json  # Get JSON data sent from JavaScript
     objects = data['objects']  # Extract objects list from JSON
@@ -69,23 +72,30 @@ def simulate_model():
     print("Received objects:", planets)  # Debug: print the objects
     with open('planets_data.pkl', 'wb') as f:
         pickle.dump(planets, f)
-    try:
-        # Run the Pygame script as a separate process
-        subprocess.Popen(['python', 'planet_Simulation_Orbit.py'])
-        return jsonify({'status': 'success', 'message': 'Simulation started and objects received successfully!'})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)})
+    return jsonify({'status': 'success', 'message': 'Simulation started and objects received successfully!'})
 
 
-@app.route('/simulationModel1')
+
+@app.route('/simulationModel1')  # opens the simulation lobby page for the built-in simulation
 def simulate_model1():
     return render_template('simulationModel.html')
 
-@app.route('/start-simulation')
+
+@app.route('/start-simulation')  # This function activate the simulation for the built-in model
 def start_simulation():
     try:
         # Runs the pygame script as a separate process
         subprocess.Popen(['python', 'planet_Simulation_Above.py'])
+        return "Simulation started"
+    except Exception as e:
+        return str(e)
+
+
+@app.route('/buildModel2')  # This function activate the simulation for the client model
+def start_simulation_client():
+    try:
+        # Runs the pygame script as a separate process
+        subprocess.Popen(['python', 'planet_Simulation_Orbit.py'])
         return "Simulation started"
     except Exception as e:
         return str(e)

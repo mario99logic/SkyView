@@ -125,7 +125,9 @@
 
         </div>
 
-           <button type="button" class ="btn-main" onclick="sendObjects('{{ url_for('build_model') }}')">Simulate Model</button>
+            <a href="{{ url_for('build_model_client_simulation') }}" class="btn-link">
+           <button  type="button" class ="btn-main" onclick="sendObjects()">Simulate Model</button>
+            </a>
 
          <a href="{{ url_for('home') }}">
     <button type="button" class="btn-back">&larr; Back</button>
