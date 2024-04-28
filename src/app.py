@@ -101,5 +101,20 @@ def start_simulation_client():
         return str(e)
 
 
+@app.route('/NasaPicture')
+def nasa_page():
+    return render_template('pictureOfTheDay.html')
+
+@app.route('/NasaSearch')
+def nasa_search():
+    return render_template('nasaSearch.html')
+
+@app.route('/Resources')
+def open_resources():
+    return render_template('Resources.html')
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)

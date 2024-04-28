@@ -6,7 +6,7 @@
 					<a href="index.html" class="logo">SkyView</a>
 					<nav id="nav"><a href="index.html">Home</a>
 						<a href="generic.html">Generic</a>
-						<a href="elements.html">Elements</a>
+						<a href="{{ url_for('open_resources') }}">Resources</a>
 					</nav><a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
 			</header><!-- Banner --><section id="banner"><h1>Welcome to SkyView</h1>
@@ -52,19 +52,25 @@
 				</div>
 			</section><!-- Three --><section id="three" class="wrapper special"><div class="inner">
 					<header class="align-center"><h2>Explore</h2>
-						<p>Aliquam erat volutpat nam dui </p>
+						<p>Explore Official NASA Content</p>
 					</header><div class="flex flex-2">
 						<article><div class="image fit">
 								<img src="../static/images/image1.webp" alt="Pic 01" width="576" height="196"></div>
-							<header><h3>Praesent placerat magna</h3>
-							</header><p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor lorem ipsum.</p>
-							<footer><a href="#" class="button special">More</a>
+							<header><h3>Explore Space Missions with NASA's Search Tool</h3>
+							</header><p>Dive into the depths of space exploration using our NASA Mission Search tool. Input any keyword—from Mars rovers to lunar landings—and discover a wealth of images and information. Each search result provides insightful details, allowing you to learn more about the missions that have expanded our understanding of the universe.</p>
+							<footer><a href="{{ url_for('nasa_search') }}" class="button special">More</a>
 							</footer></article><article><div class="image fit">
 								<img src="../static/images/image2.webp" alt="Pic 02" width="576" height="196"></div>
-							<header><h3>Fusce pellentesque tempus</h3>
-							</header><p>Sed adipiscing ornare risus. Morbi est est, blandit sit amet, sagittis vel, euismod vel, velit. Pellentesque egestas sem. Suspendisse commodo ullamcorper magna non comodo sodales tempus.</p>
-							<footer><a href="#" class="button special">More</a>
+							<header><h3>Nasa Image Of The Day</h3>
+							</header><p>Each day, experience a unique and beautiful image of space, captured through NASA's lenses. From distant galaxies to nearby planets, each photo is accompanied by a brief explanation from an astronomer. Dive into the vastness of the cosmos right from your screen, exploring the beauty and mysteries of the universe through daily updates.</p>
+							<footer><a href="{{ url_for('nasa_page') }}" class="button special">More</a>
 							</footer></article></div>
+					 <hr>
+					 <header style="text-align: left;"><h3>Celestial Choreography: Interactive Exploration of the Cosmos</h3>
+							</header>
+					 <p style="text-align: left; margin-top: -30px;">
+						Explore the marvels of the universe with "Celestial Choreography", an immersive web application that combines classical physics with cutting-edge computational techniques to simulate and visualize the dynamic movements of celestial bodies. Our application allows users to interactively build models of the solar system, track the motion of planets, and observe celestial events through a Pygame simulation window. Additionally, delve into a daily dose of cosmic wonder with NASA's Image of the Day feature, and seamlessly search for NASA's vast array of celestial data. Whether you're a student, educator, or astronomy enthusiast, Celestial Choreography offers a unique platform to connect with the cosmos like never before.
+					</p>
 				</div>
 			</section><!-- Footer --><footer id="footer"><div class="inner">
 					<div class="flex">

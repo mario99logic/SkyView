@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Mission Search</title>
+    <link rel="stylesheet" href="../static/assets/css/main.css">
+    <link rel="stylesheet" href="../static/assets/css/resources.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="index.html" class="logo">SkyView</a>
+            <nav id="nav">
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="generic.html">Generic</a>
+                <a href="{{ url_for('open_resources') }}">Resources</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+
+    <!-- NASA Mission Search Section -->
+    <section id="nasa-search" class="wrapper">
+        <div class="inner">
+            <header id="lobby-title" style="margin-bottom: 10px; margin-top: -30px">
+                <h3>Search NASA Missions</h3>
+            </header>
+            <div class="text-content" style="text-align: center;">
+                <input type="text" id="searchQuery" placeholder="Enter search term, e.g., 'Mars Rover'">
+                <button onclick="fetchMissions()" class="button special" style="margin-top: 20px;">Search Missions</button>
+            </div>
+            <div class="flex-container">
+                <div class="text-content" id="searchResults">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const apiKey = 'N93ngQMhpK4G9ghBQfQXpXXJWJ8iMJXOtceJ7YPX';
+
+        function fetchMissions() {
+            const query = document.getElementById('searchQuery').value;
+            const url = `https://images-api.nasa.gov/search?q=${query}&media_type=image`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data.collection.items);
+                })
+                .catch(error => console.error('Error fetching NASA data:', error));
+        }
+
+        function displayResults(missions) {
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            missions.forEach(mission => {
+                const title = mission.data[0].title;
+                const nasaId = mission.data[0].nasa_id;
+                const description = mission.data[0].description;
+                const imageUrl = mission.links[0].href;
+
+                const missionElement = document.createElement('div');
+                missionElement.innerHTML = `
+                    <h4>${title}</h4>
+                    <img src="${imageUrl}" alt="${title}" style="width: 100%; max-width: 300px; height: auto;">
+                    <p>${description}</p>
+                `;
+                resultsContainer.appendChild(missionElement);
+            });
+        }
+    </script>
+</body>
+</html>

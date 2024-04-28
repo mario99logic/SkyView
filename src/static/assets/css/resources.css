@@ -1,0 +1,98 @@
+body {
+    padding-top: 4em;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333; /* Default text color for consistency */
+}
+
+#header, #navPanel {
+    background-color: #5385c1;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#header .inner {
+    width: 100%;
+    margin-bottom: -20px
+}
+
+#one h3, #two h3, #three h3 {
+    text-align: left;
+    font-size: 2em;
+    color: #5385c1;
+    font-family: 'Raleway', Arial, sans-serif;
+    font-weight: 300;
+}
+
+#lobby-title {
+    margin-bottom: -40px;
+    text-align: center;
+    font-size: 2em;
+    color: #5385c1;
+    font-family: 'Raleway', Arial, sans-serif;
+    font-weight: 300;
+}
+
+#one, #two {
+    padding-top: 0;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin
+
+}
+
+.flex-container img {
+    max-width: 300px;
+    margin-right: 2em;
+    margin-top: -20px;
+}
+
+.flex-container .text-content {
+    flex-grow: 1;
+    color: #333; /* Ensures text color matches throughout */
+    font-family: Arial, sans-serif; /* Make sure the font is consistent */
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+footer .button {
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.help-button {
+    background-color: #5385c1;
+    color: white;
+    border: none;
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+}
+
+.custom-bullet {
+    list-style-type: disc; /* Adds bullet points */
+    margin-left: 20px; /* Adjusts indentation of the list */
+    font-size: 1.2em; /* Increases the font size */
+    padding: 0; /* Removes default padding */
+}
+
+.custom-bullet li {
+    margin-bottom: 25px; /* Adds space between list items */
+}
+

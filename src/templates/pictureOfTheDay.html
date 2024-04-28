@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Picture of the Day</title>
+    <link rel="stylesheet" href="../static/assets/css/main.css">
+    <link rel="stylesheet" href="../static/assets/css/resources.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="index.html" class="logo">SkyView</a>
+            <nav id="nav">
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="generic.html">Generic</a>
+                <a href="{{ url_for('open_resources') }}">Resources</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+
+    <!-- NASA APOD Section -->
+    <section id="nasa-apod" class="wrapper">
+        <div class="inner">
+            <header id="lobby-title" style="margin-bottom: 20px; margin-top: -30px;">
+                <h3>NASA Astronomy Picture of the Day</h3>
+            </header>
+            <div class="text-content" style="text-align: center;">
+                <input type="date" id="datePicker" onchange="fetchAPOD()">
+                <button onclick="fetchAPOD()" class="button special">Load Picture</button>
+            </div>
+            <div class="flex-container">
+                <div class="text-content">
+                    <img id="apodImage" src="" alt="NASA APOD" style="max-width: 100%; height: auto; margin-top: 20px;">
+                    <p id="apodDescription"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='../static/assets/js/simulationModel.js') }}"></script>
+    <script>
+        const apiKey = 'N93ngQMhpK4G9ghBQfQXpXXJWJ8iMJXOtceJ7YPX';
+
+        function fetchAPOD() {
+            const date = document.getElementById('datePicker').value;
+            const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('apodImage').src = data.url;
+                    document.getElementById('apodDescription').textContent = data.explanation;
+                })
+                .catch(error => console.error('Error fetching the APOD:', error));
+        }
+    </script>
+</body>
+</html>
