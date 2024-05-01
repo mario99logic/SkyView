@@ -22,6 +22,8 @@ SCALE = 600000000
 planet_images = {}
 planet_paths = {}  # Dictionary to store the paths of each planet
 
+planet_names = ['sun', 'earth', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'moon']
+
 def load_planets():
     # Load the planets from a file
     with open('planets_data.pkl', 'rb') as f:
@@ -88,7 +90,7 @@ def main(planets):
 
     for planet in planets:
         if planet.name != 'sun' and planet.name != "moon":
-            if planet in all_planets:
+            if planet.name in planet_names:
                 image_path = f'static/images/{planet.name.lower()}.webp'
             else:
                 image_path = 'static/images/planet.webp'
