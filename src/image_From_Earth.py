@@ -1,96 +1,113 @@
+import pygame
 import numpy as np
-from Objects.objects import all_planets, earth
+import datetime
+from datetime import timezone
+from astropy.time import Time
+from astropy.coordinates import EarthLocation, AltAz, get_body, solar_system_ephemeris
+from astropy.time import Time
+import astropy.units as u
+from Objects.objects import all_planets
 from Objects.stars import stars
-import matplotlib.pyplot as plt
-from motion_Calculations import simulate_motion
-from matplotlib.animation import FuncAnimation
+from astropy.coordinates import SkyCoord
+# from datetime import datetime,timedelta
 
 
+pygame.init()
+WIDTH, HEIGHT = 800, 600
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Night Sky Simulation")
 
-def is_in_line_of_sight(observer_position, observer_direction, celestial_object):
-
-    if celestial_object == earth:
-        return False
-
-    # Compute the vector from the observer to the celestial object
-    direction_to_object = np.array(celestial_object.location) - np.array(observer_position)
-
-    # Normalize both direction vectors for comparison
-    normalized_observer_direction = observer_direction / np.linalg.norm(observer_direction)
-    normalized_direction_to_object = direction_to_object / np.linalg.norm(direction_to_object)
-
-    # Compute the angle between the observer's direction and the direction to the object
-    dot_product = np.dot(normalized_observer_direction, normalized_direction_to_object)
-    angle = np.arccos(dot_product)
-
-    # For now, let's assume a very wide cone of vision, say 90 degrees (pi/2 radians).
-    # You can adjust this value as needed.
-    if angle < np.pi / 2:
-        return True
-    else:
-        return False
-
-def normalize_color(color):
-    return (color[0]/255, color[1]/255, color[2]/255)
-
-
-def direction_to_2d_coordinates(observer_position, object_position):
-    direction_vector = np.array(object_position) - np.array(observer_position)
-    normalized_vector = direction_vector / np.linalg.norm(direction_vector)
-
-    # Scale the normalized vector to fit within the plot's bounds
-    scale_factor = 0.8  # Adjust this value as needed
-    scaled_vector = normalized_vector * scale_factor
-
-    return scaled_vector[0], scaled_vector[1]
-
-simulate_motion(all_planets, dt=60000, total_time=31536000)
-
-
-""" this function is for making the skyview image """
-def update_sky(frame, ax, observer_position, stars):
-    ax.clear()
-    ax.set_xlim(-1, 1)
-    ax.set_ylim(-1, 1)
-    ax.set_aspect('equal', 'box')
-    ax.set_xlabel('X direction')
-    ax.set_ylabel('Y direction')
-    ax.set_title('2D Sky Representation at timestep ' + str(frame))
-    ax.set_facecolor('black')  # Set background to black
-
-    # Simulate motion for this frame
-    simulate_motion(all_planets, dt=60*60*24, total_time=60*60*24)  # 1 day per frame
-
-    visible_planets = [planet for planet in all_planets if is_in_line_of_sight(observer_position, observer_direction, planet)]
-    for obj in visible_planets:
-        x, y = direction_to_2d_coordinates(observer_position, obj.location)
-        ax.plot(x, y, 'o', color=normalize_color(obj.color), label=obj.name)  # Planets as white dots
-
-    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-
-# Setting up the animation
-fig, ax = plt.subplots()
-observer_position = [earth.location[0], earth.location[1], earth.location[2] + earth.radius]
-observer_direction = [1, 0, 0]  # Pointing directly along the negative x-axis towards the sun
-
-ani = FuncAnimation(fig, update_sky, frames=365, fargs=(ax, observer_position, stars), repeat=True)
-plt.tight_layout()
-plt.show()
-
-
-
-
-""""
-# observer on Earth's surface,specific point for now
-observer_position = [earth.location[0], earth.location[1], earth.location[2] + earth.radius]
-observer_direction = [-1, 0, 0]  # Pointing directly along the negative x-axis towards the sun
-
-
-
-
-visible_planets = [planet for planet in all_planets if is_in_line_of_sight(observer_position, observer_direction, planet)]
-
-print(visible_planets)
-plot_sky(observer_position, visible_planets, stars)
-
+# start_time = datetime(2000,1,1)
 """
+# create current time = datetime.now(),then time_elapsed = current_time - start_time 
+# then elapsed time is time delta object
+# we can call the total_seconds method from it
+"""
+
+# Define colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+LAND_COLOR = (34, 139, 34)  # Dark green, feel free to choose any color that represents land to you
+
+# Observer's location: Haifa
+observer_location = EarthLocation(lat=32.7940 * u.deg, lon=34.9896 * u.deg, height=0 * u.m)
+
+# Initialize pygame font
+pygame.font.init()
+FONT = pygame.font.SysFont('arial', 15)
+
+
+def altaz_to_screen(alt, az, width=WIDTH, height=HEIGHT):
+    """Convert altitude and azimuth to screen coordinates."""
+    x = (az.deg % 360) / 360 * width  # Use modulo to wrap around the azimuth
+    y = height - (alt.deg + 90) / 180 * height
+    return int(x), int(y)
+
+
+def draw_local_sky(observer_position, current_time):
+    WIN.fill(BLACK)  # Clear screen to black
+
+    land_height = HEIGHT // 2  # Use half of the window height for the land
+    land_rect = pygame.Rect(0, HEIGHT - land_height, WIDTH, land_height)
+    pygame.draw.rect(WIN, LAND_COLOR, land_rect)
+
+    with solar_system_ephemeris.set('builtin'):
+
+        for planet_fromData in all_planets:
+            planet = get_body(planet_fromData.name, current_time, observer_location)
+
+            altaz = planet.transform_to(AltAz(obstime=current_time, location=observer_location))
+
+            if altaz.alt > 0:  # If above horizon
+                x, y = altaz_to_screen(altaz.alt, altaz.az)
+                pygame.draw.circle(WIN, planet_fromData.color, (x, y), 8)
+
+                label = FONT.render(planet_fromData.name.capitalize(), 1, WHITE)
+                WIN.blit(label, (x + 5, y + 5))
+    altaz_frame = AltAz(obstime=current_time, location=observer_location)
+    for star in stars:
+        # Assuming star.location is given in right ascension and declination
+        star_coord = SkyCoord(ra=star.ra * u.rad, dec=star.dec * u.rad, frame='icrs')
+        # transform stars coords from equatorial system (centered on Earth) to horizontal (relative to the observer location)
+        star_altaz = star_coord.transform_to(altaz_frame)
+
+        if star_altaz.alt > 0:  # If above horizon
+            x, y = altaz_to_screen(star_altaz.alt, star_altaz.az)
+            pygame.draw.circle(WIN, star.color, (x, y), 3)  # Stars might be smaller than planets in visualization
+            # Display star names
+            label = FONT.render(star.name, 1, WHITE)
+            WIN.blit(label, (x + 5, y + 5))
+
+    pygame.display.update()
+
+def main():
+    clock = pygame.time.Clock()
+
+    # Time acceleration factor: how much time in the simulation passes per real-time second
+    simulation_speed = 60 * 60   # Each frame simulates one hour
+    current_time = Time(datetime.datetime.now(timezone.utc))
+
+    running = True
+    while running:
+        clock.tick(30)  # Limit the frame rate to 30 FPS
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # Advance the simulation time
+        current_time += datetime.timedelta(seconds=simulation_speed / 30)  # 30 FPS
+
+        # Recalculate planet positions with the updated time, accounting for Earth's orbit and rotation
+        draw_local_sky(observer_location, current_time)
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
