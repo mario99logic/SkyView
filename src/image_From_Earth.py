@@ -36,6 +36,33 @@ observer_location = EarthLocation(lat=32.7940 * u.deg, lon=34.9896 * u.deg, heig
 pygame.font.init()
 FONT = pygame.font.SysFont('arial', 15)
 
+background_image = pygame.image.load('static/images/ground2.png')
+background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT // 2))
+
+
+star_image = pygame.image.load('static/images/star2.png')  # Ensure the image path is correct
+star_image = pygame.transform.scale(star_image, (25, 25))  # Scale the image to an appropriate size
+
+planet_images = {}
+
+# Load planet images once, scaling them appropriately
+def load_planet_images():
+    known_planets = ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "sun"]
+    for planet in known_planets:
+        image_path = f'static/images/{planet}.webp'
+        image = pygame.image.load(image_path)
+        planet_images[planet] = pygame.transform.scale(image, (30, 30))  # Scale the image for planets
+
+    # Special case for the moon
+    moon_image_path = 'static/images/moon.webp'
+    moon_image = pygame.image.load(moon_image_path)
+    planet_images['moon'] = pygame.transform.scale(moon_image, (100, 100))  # Larger scale for the moon
+
+    # Default image for unknown planets
+    planet_images['default'] = pygame.transform.scale(pygame.image.load('static/images/planet.webp'), (30, 30))
+
+load_planet_images()
+
 
 def altaz_to_screen(alt, az, width=WIDTH, height=HEIGHT):
     """Convert altitude and azimuth to screen coordinates."""
@@ -45,38 +72,34 @@ def altaz_to_screen(alt, az, width=WIDTH, height=HEIGHT):
 
 
 def draw_local_sky(observer_position, current_time):
-    WIN.fill(BLACK)  # Clear screen to black
+    WIN.fill(BLACK)  # Clear the entire screen
 
-    land_height = HEIGHT // 2  # Use half of the window height for the land
-    land_rect = pygame.Rect(0, HEIGHT - land_height, WIDTH, land_height)
-    pygame.draw.rect(WIN, LAND_COLOR, land_rect)
 
-    with solar_system_ephemeris.set('builtin'):
-
-        for planet_fromData in all_planets:
-            planet = get_body(planet_fromData.name, current_time, observer_location)
-
-            altaz = planet.transform_to(AltAz(obstime=current_time, location=observer_location))
-
-            if altaz.alt > 0:  # If above horizon
-                x, y = altaz_to_screen(altaz.alt, altaz.az)
-                pygame.draw.circle(WIN, planet_fromData.color, (x, y), 8)
-
-                label = FONT.render(planet_fromData.name.capitalize(), 1, WHITE)
-                WIN.blit(label, (x + 5, y + 5))
     altaz_frame = AltAz(obstime=current_time, location=observer_location)
     for star in stars:
-        # Assuming star.location is given in right ascension and declination
         star_coord = SkyCoord(ra=star.ra * u.rad, dec=star.dec * u.rad, frame='icrs')
-        # transform stars coords from equatorial system (centered on Earth) to horizontal (relative to the observer location)
         star_altaz = star_coord.transform_to(altaz_frame)
 
-        if star_altaz.alt > 0:  # If above horizon
+        if star_altaz.alt > 0:
             x, y = altaz_to_screen(star_altaz.alt, star_altaz.az)
-            pygame.draw.circle(WIN, star.color, (x, y), 3)  # Stars might be smaller than planets in visualization
-            # Display star names
-            label = FONT.render(star.name, 1, WHITE)
-            WIN.blit(label, (x + 5, y + 5))
+            WIN.blit(star_image, (x - star_image.get_width() // 2, y - star_image.get_height() // 2))
+
+    with solar_system_ephemeris.set('builtin'):
+        for planet_fromData in all_planets:
+            if planet_fromData.name.lower() == 'moon':
+                    planet = get_body(planet_fromData.name, current_time, observer_location)
+                    altaz = planet.transform_to(AltAz(obstime=current_time, location=observer_location))
+
+                    if altaz.alt > 0:  # If above horizon
+                        x, y = altaz_to_screen(altaz.alt, altaz.az)
+                        planet_image = planet_images.get(planet_fromData.name.lower(), planet_images['default'])
+                        WIN.blit(planet_image, (x - planet_image.get_width() // 2, y - planet_image.get_height() // 2))
+
+              #  label = FONT.render(planet_fromData.name.capitalize(), 1, WHITE)
+              #  WIN.blit(label, (x + 5, y + 5))
+
+    WIN.blit(background_image, (0, HEIGHT // 2 + 10))
+
 
     pygame.display.update()
 
@@ -84,7 +107,7 @@ def main():
     clock = pygame.time.Clock()
 
     # Time acceleration factor: how much time in the simulation passes per real-time second
-    simulation_speed = 60 * 60   # Each frame simulates one hour
+    simulation_speed = 60 * 60 * 4   # Each frame simulates one hour
     current_time = Time(datetime.datetime.now(timezone.utc))
 
     running = True

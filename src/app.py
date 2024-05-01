@@ -90,6 +90,15 @@ def start_simulation():
     except Exception as e:
         return str(e)
 
+@app.route('/start-simulation2')  # This function activate the simulation for the built-in model
+def start_simulation2():
+    try:
+        # Runs the pygame script as a separate process
+        subprocess.Popen(['python', 'image_From_Earth.py'])
+        return "Simulation started"
+    except Exception as e:
+        return str(e)
+
 
 @app.route('/buildModel2')  # This function activate the simulation for the client model
 def start_simulation_client():
