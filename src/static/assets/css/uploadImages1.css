@@ -284,5 +284,9 @@ body {
     display: none !important; /* The !important ensures that this style overrides any other display styles */
 }
 
+.btn-link {
+    text-decoration: none;
+}
+
 
 

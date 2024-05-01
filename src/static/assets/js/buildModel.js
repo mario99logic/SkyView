@@ -111,7 +111,7 @@ function updateUI(obj) {
                 <p><span class="parameter-label">Mass:</span> ${obj.mass} kg</p>
                 <p><span class="parameter-label">Radius:</span> ${obj.radius} km</p>
                 <p><span class="parameter-label">Speed:</span> (${obj.speed}) km/s</p>` : `
-                <p><span class="parameter-label">Magnitude:</span> ${obj.magnitude}</p>`}
+                `}
                 <p><span class="parameter-label">Position:</span> (${obj.position})</p>
             </div>
             <button class="delete-button" onclick="removeObject(${obj.id})">X</button>

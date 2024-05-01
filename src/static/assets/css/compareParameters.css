@@ -1,0 +1,102 @@
+@import url(font-awesome.min.css);
+@import "https://fonts.googleapis.com/css?family=Raleway:100,300,600";
+
+@font-face {
+    font-family: 'spaceFont'; /* Name to be used in CSS when specifying font-family */
+    src: url('assets/fonts/fontawesome-webfont.eot') format('truetype'); /* Path to the font file */
+}
+
+.titlePar {
+    font-family: "Raleway", Arial, sans-serif;
+    font-size: 45px; /* Adjust size as needed */
+    text-align: center;
+    color: white;
+    position: absolute; /* Position it relative to the nearest positioned ancestor or to the body if none is positioned */
+    top: 16%; /* Adjust according to your design */
+    left: 22%;
+    transform: translate(-50%, -50%); /* Center the div */
+    z-index: 2; /* Higher z-index to ensure it's above the semi-transparent background */
+  }
+
+.title-linePar {
+    background-color:  #5385c1; /* Gold color, change as needed */
+    height: 6px; /* Adjust thickness as needed */
+    width: 22%; /* Adjust length as needed */
+    position: absolute;
+    top: calc(12% + 60px); /* Adjust vertical position as needed */
+    left: 26%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+
+  .Results-Background {
+
+    position: absolute; /* Position it relative to its parent */
+    top: 15%; /* Adjust these values as needed */
+    right: 2%;
+    width: 90%; /* Adjust the size as needed */
+    height: 70%; /* Adjust the size as needed */
+    border-radius: 5px; /* Optional: if you want rounded corners */
+    padding: 10px; /* Adds padding inside the inner transparent background */
+    justify-content: flex-start; /* Centers items vertically within the inner div */
+    overflow-y: auto;
+}
+
+.parameters-table {
+  width: 100%; /* Makes the table use the full width of its parent */
+  border-collapse: collapse; /* Collapses the border to make it look more clean */
+  color: white; /* Text color */
+  font-family: 'arial', sans-serif; /* Consistent font usage */
+  margin-top: 5px; /* Adjust as needed */
+  font-family: "Raleway", Arial, sans-serif;
+}
+
+.parameters-table th,
+.parameters-table td {
+  padding: 10px; /* Padding inside table cells */
+  text-align: center; /* Aligns text to the left */
+  border-bottom: 1px solid #e5e5e5; /* A subtle border for each row */
+
+}
+
+.parameters-table th {
+  background-color: rgba(128, 128, 128, 0.5); /* Semi-transparent background for headers */
+  font-family: "Raleway", Arial, sans-serif;
+}
+
+.parameters-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1); /* Zebra striping for rows */
+  font-family: "Raleway", Arial, sans-serif;
+}
+
+.parameters-table sup {
+  font-size: 0.6em; /* Smaller font size for superscript */
+  font-family: "Raleway", Arial, sans-serif;
+}
+
+/* For webkit browsers */
+.Results-Background::-webkit-scrollbar {
+  width: 10px; /* Adjust the width of the scrollbar */
+}
+
+.Results-Background::-webkit-scrollbar-track {
+  background: rgba(52, 59, 60, 0.298); /* The track of the scrollbar */
+}
+
+.Results-Background::-webkit-scrollbar-thumb {
+  background: #5385c1; /* The draggable scrolling handle, set to blue */
+
+}
+
+.Results-Background::-webkit-scrollbar-thumb:hover {
+  background:  #5385c157; /* A darker blue on hover */
+}
+
+/* For Firefox */
+.Results-Background {
+  scrollbar-width: thin; /* 'auto' or 'thin' */
+  scrollbar-color: #5385c1 ; /* thumb and track color */
+}
+
+

@@ -69,7 +69,7 @@ def simulate_model():
     data = request.json  # Get JSON data sent from JavaScript
     objects = data['objects']  # Extract objects list from JSON
     stars, planets = parse_data_to_objects(objects)
-    print("Received objects:", planets)  # Debug: print the objects
+    print("Received objects:", planets)
     with open('planets_data.pkl', 'wb') as f:
         pickle.dump(planets, f)
     return jsonify({'status': 'success', 'message': 'Simulation started and objects received successfully!'})
@@ -112,6 +112,10 @@ def nasa_search():
 @app.route('/Resources')
 def open_resources():
     return render_template('Resources.html')
+
+@app.route('/CompareParameters')
+def open_compare():
+    return render_template('compareParameters.html')
 
 
 

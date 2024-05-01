@@ -30,13 +30,6 @@ def load_planets():
 
 p1 = load_planets()
 
-for planet in p1:
-    if planet.name != 'sun' and planet.name != "moon":
-        image_path = f'static/images/{planet.name}.webp'
-        image = pygame.image.load(image_path)
-        image = pygame.transform.smoothscale(image, (40, 40))
-        planet_images[planet.name] = image
-        planet_paths[planet.name] = []  # Initialize an empty list for storing path points
 
 def draw_orbit(planet):
     """Draw the orbit of a planet by connecting past positions transformed to screen coordinates."""
@@ -95,7 +88,10 @@ def main(planets):
 
     for planet in planets:
         if planet.name != 'sun' and planet.name != "moon":
-            image_path = f'static/images/{planet.name}.webp'
+            if planet in all_planets:
+                image_path = f'static/images/{planet.name.lower()}.webp'
+            else:
+                image_path = 'static/images/planet.webp'
             image = pygame.image.load(image_path)
             image = pygame.transform.smoothscale(image, (40, 40))
             planet_images[planet.name] = image

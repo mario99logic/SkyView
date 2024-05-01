@@ -173,3 +173,24 @@
 .btn-link {
     text-decoration: none;
 }
+
+.btn-2 {
+    background-color: #5385c1; /* Button background color */
+    color: white; /* Text color, using `rgb` or `hex` is fine */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* Removes the default border */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+    display: block; /* Block display to fit the full container width */
+    width: 122px; /* Width of the button */
+    height: 41px;
+    margin: -70px 0 20px 1100px; /* Adjusted for specific positioning needs */
+    font-size: 100%; /* Adjust if necessary */
+    text-decoration: none; /* Ensures no underline */
+    z-index: 2;
+    position: relative;
+}
+
+  a.btn-2, .btn-2 a {
+    text-decoration: none; /* Removes underline from links */
+    color: inherit; /* Inherits color from `.btn-2` styling */
+}
