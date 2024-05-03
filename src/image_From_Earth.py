@@ -4,12 +4,11 @@ import datetime
 from datetime import timezone
 from astropy.time import Time
 from astropy.coordinates import EarthLocation, AltAz, get_body, solar_system_ephemeris
-from astropy.time import Time
 import astropy.units as u
 from Objects.objects import all_planets
 from Objects.stars import stars
 from astropy.coordinates import SkyCoord
-# from datetime import datetime,timedelta
+import os
 
 
 pygame.init()
@@ -17,17 +16,15 @@ WIDTH, HEIGHT = 800, 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Night Sky Simulation")
 
-# start_time = datetime(2000,1,1)
-"""
-# create current time = datetime.now(),then time_elapsed = current_time - start_time 
-# then elapsed time is time delta object
-# we can call the total_seconds method from it
-"""
+# Directory to save screenshots
+screenshot_directory = "../simulatedImages"
+if not os.path.exists(screenshot_directory):
+    os.makedirs(screenshot_directory)
 
 # Define colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-LAND_COLOR = (34, 139, 34)  # Dark green, feel free to choose any color that represents land to you
+LAND_COLOR = (34, 139, 34)
 
 # Observer's location: Haifa
 observer_location = EarthLocation(lat=32.7940 * u.deg, lon=34.9896 * u.deg, height=0 * u.m)
@@ -38,7 +35,6 @@ FONT = pygame.font.SysFont('arial', 15)
 
 background_image = pygame.image.load('static/images/ground2.png')
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT // 2))
-
 
 star_image = pygame.image.load('static/images/star2.png')  # Ensure the image path is correct
 star_image = pygame.transform.scale(star_image, (25, 25))  # Scale the image to an appropriate size
@@ -74,7 +70,6 @@ def altaz_to_screen(alt, az, width=WIDTH, height=HEIGHT):
 def draw_local_sky(observer_position, current_time):
     WIN.fill(BLACK)  # Clear the entire screen
 
-
     altaz_frame = AltAz(obstime=current_time, location=observer_location)
     for star in stars:
         star_coord = SkyCoord(ra=star.ra * u.rad, dec=star.dec * u.rad, frame='icrs')
@@ -87,29 +82,23 @@ def draw_local_sky(observer_position, current_time):
     with solar_system_ephemeris.set('builtin'):
         for planet_fromData in all_planets:
             if planet_fromData.name.lower() == 'moon':
-                    planet = get_body(planet_fromData.name, current_time, observer_location)
-                    altaz = planet.transform_to(AltAz(obstime=current_time, location=observer_location))
+                planet = get_body(planet_fromData.name, current_time, observer_location)
+                altaz = planet.transform_to(AltAz(obstime=current_time, location=observer_location))
 
-                    if altaz.alt > 0:  # If above horizon
-                        x, y = altaz_to_screen(altaz.alt, altaz.az)
-                        planet_image = planet_images.get(planet_fromData.name.lower(), planet_images['default'])
-                        WIN.blit(planet_image, (x - planet_image.get_width() // 2, y - planet_image.get_height() // 2))
-
-              #  label = FONT.render(planet_fromData.name.capitalize(), 1, WHITE)
-              #  WIN.blit(label, (x + 5, y + 5))
+                if altaz.alt > 0:  # If above horizon
+                    x, y = altaz_to_screen(altaz.alt, altaz.az)
+                    planet_image = planet_images.get(planet_fromData.name.lower(), planet_images['default'])
+                    WIN.blit(planet_image, (x - planet_image.get_width() // 2, y - planet_image.get_height() // 2))
 
     WIN.blit(background_image, (0, HEIGHT // 2 + 10))
-
-
     pygame.display.update()
 
 def main():
     clock = pygame.time.Clock()
-
-    # Time acceleration factor: how much time in the simulation passes per real-time second
-    simulation_speed = 60 * 60 * 4   # Each frame simulates one hour
+    simulation_speed = 60 * 60  # Each frame simulates one hour
     current_time = Time(datetime.datetime.now(timezone.utc))
 
+    frame_count = 0  # Keep track of the number of frames
     running = True
     while running:
         clock.tick(30)  # Limit the frame rate to 30 FPS
@@ -118,19 +107,16 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Advance the simulation time
-        current_time += datetime.timedelta(seconds=simulation_speed / 30)  # 30 FPS
+        if frame_count == 1:  # After the first frame
+            pygame.image.save(WIN, os.path.join(screenshot_directory, "screenshot_after_one_frame.png"))
+        elif frame_count == 3:  # After the second frame
+            pygame.image.save(WIN, os.path.join(screenshot_directory, "screenshot_after_three_frames.png"))
 
-        # Recalculate planet positions with the updated time, accounting for Earth's orbit and rotation
+        current_time += datetime.timedelta(seconds=simulation_speed / 30)
         draw_local_sky(observer_location, current_time)
+        frame_count += 1  # Increment the frame count
 
     pygame.quit()
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-

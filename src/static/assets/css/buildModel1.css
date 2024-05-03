@@ -194,3 +194,12 @@
     text-decoration: none; /* Removes underline from links */
     color: inherit; /* Inherits color from `.btn-2` styling */
 }
+
+ .btn-2:hover {
+    background-color:  #5385c157; /* Darker color on hover */
+    cursor: pointer;
+}
+
+.link-no-underline {
+    text-decoration: none; /* Removes the underline */
+}

@@ -4,7 +4,7 @@ import os
 import subprocess
 import pickle
 
-from Objects.objects import parse_data_to_objects
+from Objects.objects import parse_data_to_objects, all_planets_json
 from src.motion_Calculations import simulate_motion
 
 app = Flask(__name__)
@@ -126,7 +126,9 @@ def open_resources():
 def open_compare():
     return render_template('compareParameters.html')
 
-
+@app.route('/get_planets')
+def get_planets():
+    return all_planets_json
 
 
 if __name__ == "__main__":

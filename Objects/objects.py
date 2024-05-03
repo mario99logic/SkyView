@@ -1,3 +1,6 @@
+import json
+
+
 class CelestialObject:
     def __init__(self, name, object_type, mass, radius, location, speed, initial_speed, initial_location, color):
         self.name = name
@@ -204,6 +207,18 @@ all_planets = [sun, earth, mercury, venus, mars, jupiter, saturn, uranus, neptun
 
 #all_planets = [sun, earth]
 
+def celestial_object_to_dict(obj):
+    return {
+        "name": obj.name,
+        "type": obj.object_type,
+        "mass": obj.mass,
+        "radius": obj.radius,
+        "location": obj.location,
+        "speed": obj.speed,
+        "color": obj.color
+    }
+
+all_planets_json = json.dumps([celestial_object_to_dict(planet) for planet in all_planets])
 
 
 

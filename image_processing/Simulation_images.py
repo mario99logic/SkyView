@@ -91,8 +91,8 @@ def process_and_classify(file_path):
 def process_and_find_biggest_circle(file_path):
     image = load_image(file_path)
     thresh = preprocess_image(image)
-  #  cv.imshow('Preprocessed Image', thresh)  # Display the image
-  #  cv.waitKey(0)  # Wait for a key press to close the window
+ #   cv.imshow('Preprocessed Image', thresh)  # Display the image
+ #   cv.waitKey(0)  # Wait for a key press to close the window
   #  cv.destroyAllWindows()  # Close all OpenCV windows
     contours = find_contours(thresh)
 
@@ -134,8 +134,8 @@ for obj_type, (x, y) in objects_info:
 
 """
 
-def get_object_locations():
-    directory_path = '../uploadedImages'  # Path to the directory containing images
+def get_object_locations(directory):
+    directory_path = directory  # Path to the directory containing images
     image_paths = [os.path.join(directory_path, f) for f in os.listdir(directory_path) if
                    f.endswith(('.jpeg', '.png', '.jpg'))]
     object_locations = []
@@ -146,7 +146,11 @@ def get_object_locations():
 
     print(object_locations)
 
+    return object_locations
+
 
 if __name__ == "__main__":
-    get_object_locations()
+    get_object_locations('../simulatedImages')
+    get_object_locations('../simulatedImages2')
+
 

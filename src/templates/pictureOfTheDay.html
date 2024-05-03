@@ -31,6 +31,9 @@
                 <input type="date" id="datePicker" onchange="fetchAPOD()">
                 <button onclick="fetchAPOD()" class="button special">Load Picture</button>
             </div>
+             <div id="loadingIndicator" style="text-align: center; display: none; padding-top: 155px;">
+                <img src="../static/images/load-8510_256.gif" alt="Loading..." style="width: 50px; height: 50px;">
+            </div>
             <div class="flex-container">
                 <div class="text-content">
                     <img id="apodImage" src="" alt="NASA APOD" style="max-width: 100%; height: auto; margin-top: 20px;">
@@ -42,20 +45,35 @@
 
     <script src="{{ url_for('static', filename='../static/assets/js/simulationModel.js') }}"></script>
     <script>
-        const apiKey = 'N93ngQMhpK4G9ghBQfQXpXXJWJ8iMJXOtceJ7YPX';
+    const apiKey = 'N93ngQMhpK4G9ghBQfQXpXXJWJ8iMJXOtceJ7YPX';
 
-        function fetchAPOD() {
-            const date = document.getElementById('datePicker').value;
-            const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
+    function fetchAPOD() {
+        const date = document.getElementById('datePicker').value;
+        const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`;
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('apodImage').src = data.url;
-                    document.getElementById('apodDescription').textContent = data.explanation;
-                })
-                .catch(error => console.error('Error fetching the APOD:', error));
-        }
-    </script>
+        // Show loading indicator
+        document.getElementById('loadingIndicator').style.display = 'block';
+        document.getElementById('apodImage').style.display = 'none'; // Optionally hide image during loading
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const imageElement = document.getElementById('apodImage');
+                imageElement.onload = () => {
+                    // Hide loading indicator and show image once it's loaded
+                    document.getElementById('loadingIndicator').style.display = 'none';
+                    imageElement.style.display = 'block';
+                };
+                imageElement.src = data.url; // Set new source which triggers loading
+                document.getElementById('apodDescription').textContent = data.explanation;
+            })
+            .catch(error => {
+                console.error('Error fetching the APOD:', error);
+                // Hide loading indicator if there is an error
+                document.getElementById('loadingIndicator').style.display = 'none';
+            });
+    }
+</script>
+
 </body>
 </html>

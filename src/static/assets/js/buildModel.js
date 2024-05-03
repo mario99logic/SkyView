@@ -147,10 +147,17 @@ function sendObjects() {
         },
         body: JSON.stringify({objects: objects})  // Send objects as JSON
     })
-    .then(response => response.json())
-    .then(data => console.log("Server response:", data))
-    .catch(error => console.error('Error:', error));
+     .then(response => response.json())
+    .then(data => {
+        console.log("Server response:", data);
+        alert('The model has been built! Press continue to proceed.');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+         alert('Failed to build model');
+    });
 }
+
 
 
 
@@ -180,7 +187,57 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Dropdown #type not found'); // Error if not found
     }
     toggleFields(); // Call to set initial visibility based on the default selected option
+
+     fetch('/get_planets')
+    .then(response => response.json())
+    .then(data => {
+        planetsData = data;
+        console.log("Planet data loaded:", planetsData);
+
+        // Ensure the 'name' input is available and attach event listener for autofill
+        var nameField = document.getElementById('name');
+        if (nameField) {
+            nameField.addEventListener('input', function() {
+                autofillPlanetData(this.value);
+            });
+            console.log("Event listener attached to name field.");
+        } else {
+            console.log("Name field not found.");
+        }
+    })
+    .catch(error => console.error('Error loading planet data:', error));
 });
 
+let planetsData = [];
 
 
+function toggleFields() {
+    var select = document.getElementById('type');
+    var planetFields = document.getElementById('planet-fields');
+    var starFields = document.getElementById('star-fields');
+
+    if (select && select.value === 'planet') {
+        planetFields.style.display = 'block';
+        starFields.style.display = 'none';
+    } else if (select && select.value === 'star') {
+        planetFields.style.display = 'none';
+        starFields.style.display = 'block';
+    }
+}
+
+function autofillPlanetData(planetName) {
+    console.log("Trying to autofill for:", planetName);
+    if (!planetsData) {
+        console.log("Planets data not loaded yet.");
+        return;
+    }
+    const planet = planetsData.find(p => p.name.toLowerCase() === planetName.toLowerCase());
+    if (planet) {
+        document.getElementById('mass').value = planet.mass;
+        document.getElementById('radius').value = planet.radius / 1000; // Convert meters to kilometers
+        document.getElementById('position').value = planet.location.join(',');
+        document.getElementById('speed').value = planet.speed.join(',');
+    } else {
+        console.log("No planet found for:", planetName);
+    }
+}
