@@ -26,10 +26,7 @@ def compute_velocity_and_position(x1, y1, x2, y2, dt):
 
     return (vx, vy), (new_x, new_y)
 
-# Example usage
-if __name__ == "__main__":
-    # Known positions and time difference
-
+def compute_parameters():
     directory = '../uploadedImages'  # Adjust the directory as needed
     positions = get_object_locations(directory)
 
@@ -40,5 +37,10 @@ if __name__ == "__main__":
         velocity, new_position = compute_velocity_and_position(x1, y1, x2, y2, dt)
         print("Velocity (vx, vy):", velocity)
         print("New Position (x, y):", new_position)
+        return {'velocity': velocity, 'position': new_position}
     else:
         print("Not enough data to calculate velocity and position.")
+
+
+
+

@@ -6,7 +6,14 @@
     <title>Sidebar Menu</title>
    <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/uploadImages1.css') }}">
    <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/compareParameters.css') }}">
+    <script src="{{ url_for('static', filename='../static/assets/js/compareParameters.js') }}"></script>
+    <style>
+         #velocity-value, #position-value, #velocity-uncertainty, #position-uncertainty {
+        font-family: Arial, sans-serif;
+    }
+    </style>
 </head>
+
 
 <body>
 
@@ -35,82 +42,26 @@
             <div class="Results-Background">
             <table class="parameters-table">
               <tr>
-                <th>Parameter Name</th>
-                <th>Estimated Value</th>
-                <th>Uncertainty</th>
-              </tr>
-              <tr>
-                <td>Earth Mass(Kg)</td>
-                <td>5.94 x 10<sup>24</sup></td>
-                <td>0.01 x 10<sup>24</sup></td>
-              </tr>
-              <tr>
-                <td>Earth Position X(Km)</td>
-                <td>-147095000</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <tr>
-                <td>Earth Position Y(Km)</td>
-                <td>0</td>
-                <td>10000</td>
-              </tr>
-              <!-- Add more rows as needed -->
+                    <th>Parameter Name</th>
+                    <th>Estimated Value</th>
+                    <th>Uncertainty</th>
+                </tr>
+                <tr>
+                    <td>Object Velocity (vx, vy)</td>
+                    <td id="velocity-value">-</td>
+                    <td id="velocity-uncertainty">-</td>
+                </tr>
+                <tr>
+                    <td>New Position (x, y)</td>
+                    <td id="position-value">-</td>
+                    <td id="position-uncertainty">-</td>
+                </tr>
             </table>
           </div>
 
 
 
-
+        <button  type="button" class ="btn-main" onclick="calculate_results()" style="margin-left: 44%; margin-top: 53%; width: 170px;">Calculate Results</button>
 
         </div>
 

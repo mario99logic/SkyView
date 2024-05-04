@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import subprocess
 import pickle
+from calculateParameters import compute_parameters
 
 from Objects.objects import parse_data_to_objects, all_planets_json
 from src.motion_Calculations import simulate_motion
@@ -129,6 +130,18 @@ def open_compare():
 @app.route('/get_planets')
 def get_planets():
     return all_planets_json
+
+@app.route('/compute-results', methods=['POST'])
+def handle_compute_results():
+    try:
+        result = compute_parameters()
+        if 'error' in result:
+            return jsonify(result), 400  # Custom error handling
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 
 if __name__ == "__main__":

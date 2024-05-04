@@ -1,11 +1,16 @@
 <!DOCTYPE HTML>
-<html><head><title>SkyView Home Page</title><meta charset="utf-8"><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../static/assets/css/main.css"></head><body>
+<html><head><title>SkyView Home Page</title><meta charset="utf-8"><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="../static/assets/css/main.css"> <style>
+    #two .inner header, #two .inner p {
+        text-align: left;
+    }
+
+</style> </head><body>
 
 		<!-- Header -->
 			<header id="header"><div class="inner">
-					<a href="index.html" class="logo">SkyView</a>
-					<nav id="nav"><a href="index.html">Home</a>
-						<a href="generic.html">Generic</a>
+					<a href="#" class="logo">SkyView</a>
+					<nav id="nav"><a href="#">Home</a>
+						<a href="#" onclick="scrollToInner(); return false;" id="genericLink">Explore</a>
 						<a href="{{ url_for('open_resources') }}">Resources</a>
 					</nav><a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
@@ -26,21 +31,21 @@
 							</footer></article></div>
 				</div>
 			</section><!-- Two --><section id="two" class="wrapper style1 special"><div class="inner">
-					<header><h2>Team</h2>
-						<p>Always committed to forging new paths.</p>
+					<header><h2>Journey Through the Galaxy with SkyView</h2>
+						<p>Explore the marvels of the universe with SkyView, an immersive web application that combines classical physics with cutting-edge computational techniques to simulate and visualize the dynamic movements of celestial bodies. Our application allows users to interactively build models of the solar system, track the motion of planets, and observe celestial events through a Pygame simulation window. Additionally, delve into a daily dose of cosmic wonder with NASA's Image of the Day feature, and seamlessly search for NASA's vast array of celestial data. Whether you're a student, educator, or astronomy enthusiast, SkyView offers a unique platform to connect with the cosmos like never before.</p>
 					</header><div class="flex flex-4">
 						
 						
 						<div class="box person">
 							<div class="image round">
-								<img src="../static/images/upload-icon.png" alt="Person 3" width="148" height="160"></div>
+								<img src="../static/images/image0.jpeg" alt="Person 3" width="85" height="100"></div>
 							<h3>Mario</h3>
 							<p></p>
 						</div>
 
 						<div class="box person">
 							<div class="image round">
-							<!---->	<img src="../static/images/upload-icon.png" alt="Person 3" width="148" height="160"></div>
+							<!---->	<img src="../static/images/upload-icon.png" alt="Person 3" width="85" height="100"></div>
 							<h3>Ibraheem</h3>
 							<p></p>
 						</div>
@@ -65,20 +70,15 @@
 							</header><p>Each day, experience a unique and beautiful image of space, captured through NASA's lenses. From distant galaxies to nearby planets, each photo is accompanied by a brief explanation from an astronomer. Dive into the vastness of the cosmos right from your screen, exploring the beauty and mysteries of the universe through daily updates.</p>
 							<footer><a href="{{ url_for('nasa_page') }}" class="button special">More</a>
 							</footer></article></div>
-					 <hr>
-					 <header style="text-align: left;"><h3>Celestial Choreography: Interactive Exploration of the Cosmos</h3>
-							</header>
-					 <p style="text-align: left; margin-top: -30px;">
-						Explore the marvels of the universe with "Celestial Choreography", an immersive web application that combines classical physics with cutting-edge computational techniques to simulate and visualize the dynamic movements of celestial bodies. Our application allows users to interactively build models of the solar system, track the motion of planets, and observe celestial events through a Pygame simulation window. Additionally, delve into a daily dose of cosmic wonder with NASA's Image of the Day feature, and seamlessly search for NASA's vast array of celestial data. Whether you're a student, educator, or astronomy enthusiast, Celestial Choreography offers a unique platform to connect with the cosmos like never before.
-					</p>
+
+
 				</div>
 			</section><!-- Footer --><footer id="footer"><div class="inner">
 					<div class="flex">
 						<ul class="icons"><li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
-							<li><a href="#" class="icon fa-pinterest-p"><span class="label">Pinterest</span></a></li>
-							<li><a href="#" class="icon fa-vimeo"><span class="label">Vimeo</span></a></li>
+							<li><a href="https://www.linkedin.com/in/mario-rohana/" class="icon fa-linkedin"><span class="label">linkedIn</span></a></li>
+
 						</ul></div>
 				</div>
 			</footer><div class="copyright">
@@ -86,4 +86,15 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script><script src="assets/js/skel.min.js"></script><script src="assets/js/util.js"></script><script src="assets/js/main.js"></script></body></html>
+			<script src="assets/js/jquery.min.js"></script><script src="assets/js/skel.min.js"></script><script src="assets/js/util.js"></script><script src="assets/js/main.js"></script> <script>
+    // Function to scroll to the 'inner' section
+    function scrollToInner() {
+        const innerSection = document.getElementById('three');
+        if (innerSection) {
+            innerSection.scrollIntoView({
+                behavior: 'smooth'  // Ensures the scrolling is smooth
+            });
+        }
+    }
+</script>
+</body></html>
