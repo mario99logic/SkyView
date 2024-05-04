@@ -76,3 +76,28 @@ footer .button {
     line-height: 1; /* Adjusts line height to ensure vertical centering */
     padding: 0; /* Removes any padding that might affect the shape */
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+   top: 120%;
+  left: 40%;
+  margin-left: -70px;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
