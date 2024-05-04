@@ -120,7 +120,7 @@ body {
     text-align: center;
     color: white;
     position: absolute; /* Position it relative to the nearest positioned ancestor or to the body if none is positioned */
-    top: 33%; /* Adjust according to your design */
+    top: 30%; /* Adjust according to your design */
     left: 27%;
     transform: translate(-50%, -50%); /* Center the div */
     z-index: 2; /* Higher z-index to ensure it's above the semi-transparent background */
@@ -151,8 +151,8 @@ body {
     cursor:pointer; /* Changes the cursor to a pointer on hover */
     font-size: 16px; /* Adjust the font size as needed */
     position: absolute; /* Position relative to its nearest positioned ancestor */
-    top: 180px; /* Distance from the top of the parent container */
-    left: 375px; /* Distance from the left of the parent container */
+    top: 140px; /* Distance from the top of the parent container */
+    left: 380px; /* Distance from the left of the parent container */
     padding: 10px; /* Padding around the icon */
 }
 
@@ -287,6 +287,9 @@ body {
 .btn-link {
     text-decoration: none;
 }
+
+
+
 
 
 

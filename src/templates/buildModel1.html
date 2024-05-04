@@ -11,7 +11,12 @@
         var simulateUrl = "{{ url_for('simulate_model') }}";
     </script>
     <script src="{{ url_for('static', filename='../static/assets/js/buildModel.js') }}"></script>
-
+  <script>
+    function showExplanation() {
+        var message = "Add your celestial bodies and simulate their motion.";
+        alert(message);
+    }
+</script>
 
 </head>
 
@@ -136,7 +141,10 @@
          <a href="{{ url_for('home') }}">
     <button type="button" class="btn-back">&larr; Back</button>
         </a>
-        <button class="help-button">?</button>
+
+
+
+        <button class="help-button" onclick="showExplanation()">?</button>
 
         </body>
     

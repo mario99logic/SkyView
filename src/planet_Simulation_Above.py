@@ -15,7 +15,7 @@ sun_image = pygame.image.load('static/images/sun.webp')
 sun_image = pygame.transform.smoothscale(sun_image, (80, 80))
 
 # Scaling factor to fit the solar system within our screen
-SCALE = 600000000
+SCALE = 4000000000
 
 planet_images = {}
 planet_paths = {}  # Dictionary to store the paths of each planet

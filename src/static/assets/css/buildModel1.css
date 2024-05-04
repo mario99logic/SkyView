@@ -203,3 +203,29 @@
 .link-no-underline {
     text-decoration: none; /* Removes the underline */
 }
+
+
+.tooltip {
+  position: absolute;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+   bottom: 150%;
+left:40%
+  margin-left: -70px;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}

@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidebar Menu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/assets/css/uploadImages1.css') }}">
+
     <script src="{{ url_for('static', filename='assets/js/uploadImageFunctionality.js') }}"></script>
+    <script>
+    function showExplanation() {
+        var message = "upload a set of sky images with different time and angle.";
+        alert(message);
+    }
+</script>
 </head>
 
 <body>
@@ -49,7 +56,9 @@
 
       </div>
 
-      <button class="help-button">?</button>
+      <button class="help-button" onclick="showExplanation()">?</button>
+
+
     <a href="{{ url_for('open_compare') }}" class="btn-link">
       <button type="button" id="addButton" class="btn-main">Continue</button>
     </a>
