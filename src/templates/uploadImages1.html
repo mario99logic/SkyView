@@ -16,10 +16,9 @@
             <span></span>
             <span></span>
             <div class="navbar">
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="#">Menu1</a>
-                <a href="#">Menu2</a>
-                <a href="#">Menu3</a>
+               <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('home') }}#three">Explore</a>
+                <a href="{{ url_for('open_resources') }}">Resources</a>
             </div>
 
         </button>
@@ -49,12 +48,17 @@
 
       </div>
 
-      <button class="help-button">?</button>
-    <a href="{{ url_for('open_compare') }}" class="btn-link">
+
+    <a href="{{ url_for('home') }}" class="btn-link">
       <button type="button" id="addButton" class="btn-main">Continue</button>
     </a>
 
-
+     <div class="tooltip">
+    <button class="help-button">?</button>
+    <span class="tooltip-text">
+        To upload images, click the 'Choose File' button and select the images you wish to add. Ensure that the images are in sequential order and are of the types 'png', 'jpg', 'jpeg', or 'gif'. After selecting your images, click 'Continue' to return to the home page. From there, navigate to the 'Build Model' section to view the results of your calculations.
+    </span>
+</div>
 
       <a href="{{ url_for('home') }}">
     <button type="button" class="btn-back">&larr; Back</button>

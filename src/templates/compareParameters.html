@@ -23,10 +23,9 @@
             <span></span>
             <span></span>
             <div class="navbar">
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="#">Menu1</a>
-                <a href="#">Menu2</a>
-                <a href="#">Menu3</a>
+               <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('home') }}#three">Explore</a>
+                <a href="{{ url_for('open_resources') }}">Resources</a>
             </div>
 
 
@@ -63,13 +62,23 @@
 
         <button  type="button" class ="btn-main" onclick="calculate_results()" style="margin-left: 44%; margin-top: 53%; width: 170px;">Calculate Results</button>
 
+
+
         </div>
 
+         <div class="tooltip2">
+            <button class="help-button">?</button>
+            <span class="tooltip-text2">
+                Click on 'Calculate Results' to view the outcomes, including the estimates of the object's location in the next frame and its velocity in the uploaded images. To return to the home page at any time, click the 'Home' button located at the top right of the screen.
+            </span>
+        </div>
 
-        <button class="help-button">?</button>
         <a href="index.html">
             <button type="button" id="addButton" class="btn-back">&larr; </button>
+
         </a>
+
+
 
         </body>
 

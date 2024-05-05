@@ -110,6 +110,15 @@ def start_simulation_client():
     except Exception as e:
         return str(e)
 
+@app.route('/buildModelPOV')  # This function activate the simulation for the client model
+def start_simulation_pov():
+    try:
+        # Runs the pygame script as a separate process
+        subprocess.Popen(['python', 'image_From_Earth_2.py'])
+        return "Simulation started"
+    except Exception as e:
+        return str(e)
+
 
 @app.route('/NasaPicture')
 def nasa_page():

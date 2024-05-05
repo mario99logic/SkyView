@@ -16,7 +16,7 @@
             <a href="index.html" class="logo">SkyView</a>
             <nav id="nav">
                 <a  href="{{ url_for('home') }}">Home</a>
-                <a href="generic.html">Generic</a>
+                 <a href="{{ url_for('home') }}#three">Explore</a>
                 <a href="{{ url_for('open_resources') }}">Resources</a>
             </nav>
             <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
@@ -36,7 +36,7 @@
     <section id="one" class="wrapper">
         <div class="inner">
             <header>
-                <h3>Custom Simulation</h3>
+                <h3>Custom Simulation </h3>
             </header>
             <div class="flex-container">
                 <img src="../static/images/simulationAbove.png" alt="Sky Map Sample">
@@ -44,7 +44,12 @@
                     <p>Experience the solar system as you define it with this interactive simulation tool. Designed to visualize the movements of planets based on parameters you initialize, this model allows for a unique exploration that may not strictly adhere to real-world data. Each planet's trajectory, influenced by your values for mass, speed, and orbit, offers a personalized and insightful look into celestial mechanics. Enhance your viewing experience by using the left and right arrow keys to zoom out and in, respectively. Additionally, the simulation's time step (dt) is set to one day, but you can adjust the speed of the simulation—making it faster or slower—by using the up and down arrow keys. This feature offers flexibility in observing the dynamic interactions at various speeds. It's an excellent resource for teachers, students, and anyone interested in astronomy, offering a clear view of the gravitational forces at play and the paths planets follow. Use this tool to deepen your understanding of our solar system, whether for education or personal interest.</p>
                     <footer>
                         <a href="#" class="button special" onclick="start1()">Start Simulator</a>
+                         <div class="tooltip">
                         <a class="button special">?</a>
+                            <span class="tooltip-text">
+                                To begin viewing the simulation, click the "Start Simulation" button. This will launch the simulation in a separate Pygame window. You can zoom in or out by using the left and right arrow keys and slow the movement by the up and down arrow keys. Please note that there might be a brief loading time as the simulation initializes. To see the results for the real images click on compare results.
+                            </span>
+                            </div>
                     </footer>
                 </div>
             </div>
@@ -55,18 +60,18 @@
     <section id="two" class="wrapper">
         <div class="inner">
             <header>
-                <h3>Planet Simulator<br> Simulate planetary orbits</h3>
+                <h3>Custom Simulator<br>Earth POV</h3>
             </header>
             <div class="flex-container">
-                <img src="../static/images/planet-simulator-sample.jpg" alt="Planet Simulator Sample">
+                <img src="../static/images/pov.png" alt="Planet Simulator Sample">
                 <div class="text-content">
-                    <p>Simulate and visualize the orbital mechanics of planets in our solar system with adjustable parameters.</p>
+                    <p>This simulation provides a unique perspective from Earth, specifically positioned at a point in Karmiel, Israel. Oriented at 0 degrees, it offers a direct view along the horizon. See the planets you chose as part of your personalized setup, allowing for the observation of their celestial movements and alignments from this specific location. This tailored experience enhances your understanding of how these planets appear in relation to Karmiel's geographic and celestial coordinates.</p>
                     <footer>
-                        <a href="#" class="button special" onclick="start_simulation_client()">Start Simulator</a>
+                        <a href="#" class="button special" onclick="start2()">Start Simulator</a>
                         <div class="tooltip">
                         <a class="button special">?</a>
                             <span class="tooltip-text">
-                                explain
+                                To begin viewing the simulation, click the "Start Simulation" button. This will launch the simulation in a separate Pygame window. Please note that there might be a brief loading time as the simulation initializes.
                             </span>
                             </div>
                     </footer>

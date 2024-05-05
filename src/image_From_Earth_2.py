@@ -54,6 +54,8 @@ star_image = pygame.transform.scale(star_image, (25, 25))  # Scale the image to 
 
 planet_images = {}
 
+known_planets = ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "sun"]
+
 # Directory to save screenshots
 screenshot_directory = "../simulatedImages2"
 if not os.path.exists(screenshot_directory):
@@ -62,7 +64,6 @@ if not os.path.exists(screenshot_directory):
 
 # Load planet images once, scaling them appropriately
 def load_planet_images():
-    known_planets = ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "sun"]
     for planet in known_planets:
         image_path = f'static/images/{planet}.webp'
         image = pygame.image.load(image_path)
@@ -98,8 +99,10 @@ def draw_local_sky(observer_position, current_time, planet_list):
             x, y = altaz_to_screen(star_altaz.alt, star_altaz.az)
             WIN.blit(star_image, (x - star_image.get_width() // 2, y - star_image.get_height() // 2))
 
+    filtered_planet_list = [planet for planet in planet_list if planet.name.lower() in known_planets]
+
     with solar_system_ephemeris.set('builtin'):
-        for planet_fromData in planet_list:
+        for planet_fromData in filtered_planet_list:
           #  if planet_fromData.name.lower() == 'moon':
                     planet = get_body(planet_fromData.name, current_time, observer_location)
                     altaz = planet.transform_to(AltAz(obstime=current_time, location=observer_location))

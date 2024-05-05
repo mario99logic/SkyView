@@ -203,3 +203,27 @@
 .link-no-underline {
     text-decoration: none; /* Removes the underline */
 }
+
+.tooltip3 {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip3 .tooltip-text3 {
+  visibility: hidden;
+  width: 400px;
+  background-color: black;
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 3;
+  margin-top: -130px;
+  margin-left: 850px;
+}
+
+.tooltip3:hover .tooltip-text3 {
+  visibility: visible;
+}

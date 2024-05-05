@@ -16,7 +16,7 @@
             <a href="index.html" class="logo">SkyView</a>
             <nav id="nav">
                 <a  href="{{ url_for('home') }}">Home</a>
-                <a href="generic.html">Generic</a>
+                <a href="{{ url_for('home') }}#three">Explore</a>
                 <a href="{{ url_for('open_resources') }}">Resources</a>
             </nav>
             <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
@@ -40,7 +40,12 @@
                     <p>Experience our solar system in motion with this simulation tool, designed to show the accurate movements of planets from a unique overhead view. This simulation uses real-life data on each planet's mass, speed, and orbit, providing a detailed and professional look at how they interact. Enhance your viewing experience by using the left and right arrow keys to zoom out and in, respectively. Additionally, the simulation's time step (dt) is set to one day, but you can adjust the speed of the simulation—making it faster or slower—by using the up and down arrow keys. This feature offers flexibility in observing the dynamic interactions at various speeds. It's an excellent resource for teachers, students, and anyone interested in astronomy, offering a clear view of the gravitational forces at play and the paths planets follow. Use this tool to deepen your understanding of our solar system, whether for education or personal interest.</p>
                     <footer>
                         <a href="#" class="button special" onclick="startSimulation()">Start Simulator</a>
+                         <div class="tooltip">
                         <a class="button special">?</a>
+                            <span class="tooltip-text">
+                                To begin viewing the simulation, click the "Start Simulation" button. This will launch the simulation in a separate Pygame window. You can zoom in or out by using the left and right arrow keys and slow the movement by the up and down arrow keys. Please note that there might be a brief loading time as the simulation initializes.
+                            </span>
+                            </div>
                     </footer>
                 </div>
             </div>
@@ -59,7 +64,12 @@
                     <p>Explore the fascinating dynamics of the moon with our Moon Simulator. This tool generates simulated images of the moon as it traverses the night sky, with each frame representing an hourly progression. By observing the moon's movement across these frames, we use the simulated images to refine our algorithm, which calculates the velocity and position of the moon. Designed for both educational and development purposes, this simulation provides a vivid visual understanding of lunar motion. Click on this simulation to witness the moon’s real-time movement from an Earth point of view, looking toward the horizon where the sky meets the ground. Ideal for enthusiasts and developers alike, this tool brings the intricacies of celestial mechanics right to your fingertips.</p>
                     <footer>
                         <a href="#" class="button special" onclick="startSimulation2()">Start Simulator</a>
+                         <div class="tooltip">
                         <a class="button special">?</a>
+                            <span class="tooltip-text">
+                                To begin viewing the simulation, click the "Start Simulation" button. This will launch the simulation in a separate Pygame window. Please note that there might be a brief loading time as the simulation initializes.
+                            </span>
+                            </div>
                     </footer>
                 </div>
             </div>

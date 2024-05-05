@@ -24,17 +24,16 @@
             <span></span>
             <div class="navbar">
 
-                <a href="design.html">Home</a>
-                <a href="#">Menu1</a>
-                <a href="#">Menu2</a>
-                <a href="#">Menu3</a>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('home') }}#three">Explore</a>
+                <a href="{{ url_for('open_resources') }}">Resources</a>
             </div>
             
         </button>
     </div>
 
 
-    <body>
+
         <div class="title">
           Model Definition
         </div>
@@ -136,10 +135,16 @@
          <a href="{{ url_for('home') }}">
     <button type="button" class="btn-back">&larr; Back</button>
         </a>
-        <button class="help-button">?</button>
+        <div class="tooltip3">
+    <button class="help-button">?</button>
+    <span class="tooltip-text3">
+       Begin by selecting whether to add a 'Planet' or a 'Star'. For a known planet, type its name to auto-populate its original values, which you can edit as needed. After adjusting the parameters, click the 'Add' button to include it in the simulation. To add an unknown planet, choose this option for a unique appearance. To remove an object, click the 'X' button at the top right of the planet box. Once all objects are in place, click 'Simulate Model' to start the simulation, and then 'Continue' to view the simulation on the next page.
+    </span>
+</div>
 
-        </body>
-    
+
     </body>
+    
+
 
     </html>
