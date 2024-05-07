@@ -23,13 +23,17 @@ SkyView is a capstone project developed at the Software Engineering Department o
 
 Welcome to SkyView! Our web application offers a variety of functionalities designed for both enthusiasts and researchers in astronomy. Here's what you can explore within SkyView:
 
-- **Explore Built-in Simulations**: Dive into our pre-configured simulations to witness the realistic movements of planets and other celestial phenomena.
+### Explore Built-in Simulations
+Dive into our pre-configured simulations to witness the realistic movements of planets and other celestial phenomena.
 
-- **Create Your Own Simulations**: Design and customize your own planetary simulations. Adjust parameters to see how different variables affect interactions between celestial bodies.
+### Create Your Own Simulations
+Design and customize your own planetary simulations. Adjust parameters to see how different variables affect interactions between celestial bodies.
 
-- **Object Movement Detection**: Upload astronomical images, and our application will analyze them to detect and track the movements of objects across the sky.
+### Object Movement Detection
+Upload astronomical images, and our application will analyze them to detect and track the movements of objects across the sky.
 
-- **Discover Space with NASA**: Gain access to the latest astronomical data and imagery through our integration with the NASA API.
+### Discover Space with NASA
+Gain access to the latest astronomical data and imagery through our integration with the NASA API.
 
 
 ##  Technology Stack
