@@ -1,6 +1,6 @@
 import pygame
 from motion_Calculations import simulate_motion
-from Objects.objects import all_planets
+from src.Objects.objects import all_planets
 
 pygame.init()
 

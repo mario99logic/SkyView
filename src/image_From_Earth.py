@@ -1,12 +1,11 @@
 import pygame
-import numpy as np
 import datetime
 from datetime import timezone
 from astropy.time import Time
 from astropy.coordinates import EarthLocation, AltAz, get_body, solar_system_ephemeris
 import astropy.units as u
-from Objects.objects import all_planets
-from Objects.stars import stars
+from src.Objects.objects import all_planets
+from src.Objects.stars import stars
 from astropy.coordinates import SkyCoord
 import os
 
@@ -17,7 +16,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Night Sky Simulation")
 
 # Directory to save screenshots
-screenshot_directory = "../simulatedImages"
+screenshot_directory = "../images/simulatedImages"
 if not os.path.exists(screenshot_directory):
     os.makedirs(screenshot_directory)
 

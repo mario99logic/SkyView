@@ -1,8 +1,7 @@
 import pygame
 from motion_Calculations import simulate_motion
-import sys
 import pickle
-from Objects.objects import all_planets, sun
+from src.Objects.objects import all_planets
 
 pygame.init()
 

@@ -1,17 +1,16 @@
-from flask import Flask, request, render_template, jsonify, redirect, url_for
+from flask import Flask, request, render_template, jsonify
 from werkzeug.utils import secure_filename
 import os
 import subprocess
 import pickle
 from calculateParameters import compute_parameters
 
-from Objects.objects import parse_data_to_objects, all_planets_json
-from src.motion_Calculations import simulate_motion
+from src.Objects.objects import parse_data_to_objects, all_planets_json
 
 app = Flask(__name__)
 
 # Define the path for the uploaded images. You may need to adjust the path depending on your project structure.
-app.config['UPLOAD_FOLDER'] = '../uploadedImages'
+app.config['UPLOAD_FOLDER'] = '../images/uploadedImages'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 
 

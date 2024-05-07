@@ -1,6 +1,4 @@
-import numpy as np
-
-from image_processing.Simulation_images import get_object_locations
+from src.image_processing.Simulation_images import get_object_locations
 
 
 def compute_velocity_and_position(x1, y1, x2, y2, dt):
@@ -27,7 +25,7 @@ def compute_velocity_and_position(x1, y1, x2, y2, dt):
     return (vx, vy), (new_x, new_y)
 
 def compute_parameters():
-    directory = '../uploadedImages'  # Adjust the directory as needed
+    directory = '../images/uploadedImages'  # Adjust the directory as needed
     positions = get_object_locations(directory)
 
     if positions and len(positions) >= 2:

@@ -2,15 +2,12 @@ import os
 import pickle
 
 import pygame
-import numpy as np
 import datetime
 from datetime import timezone
-from astropy.time import Time
 from astropy.coordinates import EarthLocation, AltAz, get_body, solar_system_ephemeris
 from astropy.time import Time
 import astropy.units as u
-from Objects.objects import all_planets
-from Objects.stars import stars
+from src.Objects.stars import stars
 from astropy.coordinates import SkyCoord
 # from datetime import datetime,timedelta
 
@@ -57,7 +54,7 @@ planet_images = {}
 known_planets = ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "sun"]
 
 # Directory to save screenshots
-screenshot_directory = "../simulatedImages2"
+screenshot_directory = "../images/simulatedImages2"
 if not os.path.exists(screenshot_directory):
     os.makedirs(screenshot_directory)
 
