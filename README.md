@@ -10,9 +10,9 @@ SkyView is a capstone project developed at the Software Engineering Department o
 
 - [Features](#features)
   - [Explore Built-in Simulations](#explore-built-in-simulations)
-  - [Create Your Own Simulations](#create-simulation)
-  - [Object Movement Detection](#object-detection)
-  - [Discover Space with NASA](#nasa)
+  - [Create Your Own Simulations](#create-your-own-simulations)
+  - [Object Movement Detection](#object-movement-detection)
+  - [Discover Space with NASA](#discover-space-with-nasa)
 - [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -61,6 +61,7 @@ Follow these steps to set up the project locally:
     python/src/app.py
 
    The server will start on http://127.0.0.1:5000. Open this URL in your browser to view the application.  
+   For more information and an orginized guide for using SkyView checkout the user guide in the DOC's directory
 
 ## Acknowledgments
 
