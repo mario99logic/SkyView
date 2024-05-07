@@ -66,7 +66,8 @@ Follow these steps to set up the project locally:
 
    The server will start on http://127.0.0.1:5000. Open this URL in your browser to view the application.  
    For more information and an orginized guide for using SkyView checkout the user guide in the DOC's directory
-
+   You can watch the video about SkyView, in the DOC's directory
+    
 ## Acknowledgments
 
 We extend our deepest gratitude to a number of individuals and organizations whose invaluable support has significantly contributed to the development and success of the SkyView project:
